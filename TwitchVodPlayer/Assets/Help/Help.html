@@ -18,12 +18,20 @@
 			margin-top: 40px;
 			margin-bottom: 40px;
 		}
+		.highlight{
+			color: rgb(216, 197, 255);
+		}
+		.highlight2{
+			font-weight: bold;
+			color: rgb(216, 197, 255);
+			font-style: italic;
+		}
 		.selectorInstruction{
 			margin-top: 10px;
 			margin-bottom: 10px;
 			margin-left: 20px;
 			
-			font-size: 26px;
+			font-size: 28px;
 		}
 		.title{
 			font-weight: bold;
@@ -46,12 +54,11 @@
 			color: rgb(220, 220, 220);
 		}
 		a:link {
-			text-decoration: none;
-			color: rgb(216, 197, 254);
+			color: rgb(226, 207, 254);
 		}
 		a:visited {
 			text-decoration: none;
-			color: rgb(206, 187, 244);
+			color: rgb(226, 207, 254);
 		}
 		a:hover {
 			color: rgb(234, 224, 255);
@@ -66,8 +73,14 @@
 	
 		<div id="selector">
 			<h1 class="title">
-				Jump to instruction:
+				Jump to section:
 			</h1>
+			
+			<div class="selectorInstruction">
+				<a href="#howItWorks">
+					How it works
+				</a>
+			</div>
 				
 			<div class="selectorInstruction">
 				<a href="#loadingAVod">
@@ -91,17 +104,35 @@
 		<hr>
 		
 		<div class="instructionBlock">
+			<h1 class="title" id="howItWorks">
+				How it works
+			</h1>
+			<div class="instructions">
+				<ul>
+					<li class="step">The user needs to have the <span class="highlight">video file of the VOD</span> for the player to load and play.</li>
+					<li class="step">You can play the video normally using the player, but if you want to have its chat displayed, you first need to get that VOD's <span class="highlight">chat file (.cht)</span>.</li>
+					<li class="step"><span class="highlight">Chat logs (.json)</span> can be converted to <span class="highlight">chat files (.cht)</span> using the <span class="highlight2">Download / Create Chat File</span> tool in the <span class="highlight2">Chat</span> menu.</li>
+					<li class="step">If you don't have it yet, you may also use the same tool to get the VOD's <span class="highlight">chat log (.json)</span> by using the <span class="highlight">VOD's ID</span>. The VOD ID is the number at the end of the VOD's URL on Twitch.</li>
+					<li class="step">The created <span class="highlight">chat file (.cht)</span> needs to have the same filename as the <span class="highlight">video file</span> and both must be in the same directory, similar to how .srt files work.</li>
+					<li class="step">Then, simply open and load the <span class="highlight">VOD's video file</span> into the player and it will automatically detect whether there is a <span class="highlight">chat file</span> for that video.</li>
+				</ul>
+			</div>
+		</div>
+		
+		<hr>
+		
+		<div class="instructionBlock">
 			<h1 class="title" id="loadingAVod">
 				Loading a VOD
 			</h1>
 			<p class="subtitle">
-				To load a VOD, open its video file.
+				To load a VOD, open its <span class="highlight">video file</span>.
 			</p>
 			<div class="instructions">
 				<ul>
-				  <li class="step">Click 'Media'</li>
-				  <li class="step">Click 'Open VOD'</li>
-				  <li class="step">Select the video file of the VOD</li>
+				  <li class="step">Click <span class="highlight2">Media</span></li>
+				  <li class="step">Click <span class="highlight2">Open VOD</span></li>
+				  <li class="step">Select the <span class="highlight">video file</span> of the VOD</li>
 				</ul>
 				<p class="note">
 					*VOD Downloaders, such as <a href="github.com/Franiac/TwitchLeecher/releases">Twitch Leecher by Franiac</a>, 
@@ -121,27 +152,27 @@
 				Getting the VOD's chat file
 			</h1>
 			<p class="subtitle">
-				To watch VODs along with the chat, you must first download its json chat log and convert it to the proper format (.cht).
+				To watch a VOD along with its chat, you must first download its <span class="highlight">chat log (.json)</span> and convert it to a <span class="highlight">chat file (.cht)</span>
 				Both can be done automatically by the program.
 			</p>
 			<ul>
-			  <li class="step">Click 'Chat'</li>
-			  <li class="step">Click 'Download / Create Chat File'</li>
-			  <li class="step">Set the Output Directory of the converted chat file</li>
+			  <li class="step">Click <span class="highlight2">Chat</span></li>
+			  <li class="step">Click <span class="highlight2">Download / Create Chat File</span></li>
+			  <li class="step">Set the <span class="highlight2">Output Directory</span> for the <span class="highlight">chat file (.cht)</span> </li>
 					<p class="note">
-						*Make sure it's in the same directory of the VOD's video file for it to be loaded.
+						*Make sure it's in the <span class="highlight">same directory</span> of the <span class="highlight">VOD's video file</span> for it to be loaded.
 					</p>
 					<p class="note">
-						*By default, if a VOD has already been loaded into the player, the Output Directory will be set to the video file's directory.
+						*By default, if a VOD has already been loaded into the player, the <span class="highlight2">Output Directory</span> will be set to the video file's directory.
 					</p>
-				<li class="step">If you already have the json chat log, uncheck 'Use VOD ID to download Chat File' and open the json chat log.</li>
-				<li class="step">If you don't have the json chat log, check 'Use VOD ID to download Chat File', then input the ID of the VOD and the program will download it.</li>
-				<li class="step">If your video file doesn't start or end at the same time as the actual VOD on Twitch then check 'Set begin/end time' and
-					input the Begin time and the End time of the video file. This will sync up the chat with the video.</li>
+				<li class="step">If you already have the <span class="highlight">chat log (.json)</span>, uncheck <span class="highlight2">Use VOD ID to download Chat File</span> and open the file.</li>
+				<li class="step">If you don't have the <span class="highlight">chat log (.json)</span>, check <span class="highlight2">Use VOD ID to download Chat File</span>, then input the ID of the VOD and the program will download it.</li>
+				<li class="step">If your video file doesn't start or end at the same time as the actual VOD on Twitch then check <span class="highlight2">Set begin/end time</span> and
+					input the <span class="highlight2">Begin time</span> and the <span class="highlight2">End time</span> of the video file. This will sync up the chat with the video.</li>
 					<p class="note">
-						*Unchecking 'Set begin/end time' will download the entire chat log of the VOD.
+						*Unchecking <span class="highlight2">Set begin/end time</span> will download the entire chat log of the VOD.
 					</p>
-				<li class="step">Finally, click the 'Create Chat File' button</li>
+				<li class="step">Finally, click the <span class="highlight2">Create Chat File</span> button</li>
 			</ul>
 			<p class="note">
 				*If a VOD has already been loaded into the player, the created chat file will automatically have the same filename as the video file, and the program will autoamtically load it
@@ -160,10 +191,10 @@
 				For the chat to use BTTV Emotes, FFZ Emotes, and the channel's badges, you must first download them.
 			</p>
 			<ul>
-				<li class="step">Click 'Resources'</li>
-				<li class="step">Click 'Download Resources'</li>
-				<li class="step">Input the name of the channel whose emotes and badges you wish to download.</li>
-				<li class="step">Click the 'Download Resources' button</li>
+				<li class="step">Click <span class="highlight2">Resources</span></li>
+				<li class="step">Click <span class="highlight2">Download Resources</span></li>
+				<li class="step">Input the <span class="highlight">name of the channel</span> whose emotes and badges you wish to download.</li>
+				<li class="step">Click the <span class="highlight2">Download Resources</span> button</li>
 			</ul>
 			<p class="note">
 				*The chat will automatically use these resources.
