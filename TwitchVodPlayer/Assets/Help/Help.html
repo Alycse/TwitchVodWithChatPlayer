@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+	<style>
+		body{
+			background-color: rgb(35,35,35);
+			overflow: visible;
+			color: rgb(240, 240, 240);
+			font-family: calibri;
+			font-size: 20px;
+			
+			margin-left: 20px;
+			margin-right: 20px;
+			margin-bottom: 400px;
+		}
+		#selector{
+			font-size: 28px;
+			
+			margin-top: 40px;
+			margin-bottom: 40px;
+		}
+		.selectorInstruction{
+			margin-top: 10px;
+			margin-bottom: 10px;
+			margin-left: 20px;
+			
+			font-size: 26px;
+		}
+		.title{
+			font-weight: bold;
+			font-size: 26px;
+		}
+		.subtitle{
+			margin-left: 20px;
+			font-size: 18px;
+		}
+		.instructionBlock{
+			margin-top: 40px;
+			margin-bottom: 40px;
+		}
+		.instructions{
+			margin-left: 20px;
+			font-size: 20px;
+		}
+		.note{
+			font-size: 16px;
+			color: rgb(220, 220, 220);
+		}
+		a:link {
+			text-decoration: none;
+			color: rgb(216, 197, 254);
+		}
+		a:visited {
+			text-decoration: none;
+			color: rgb(206, 187, 244);
+		}
+		a:hover {
+			color: rgb(234, 224, 255);
+		}
+		.step{
+			margin-top: 12px;
+			margin-bottom: 12px;
+		}
+	</style>
+	<body>
+		<hr>
+	
+		<div id="selector">
+			<h1 class="title">
+				Jump to instruction:
+			</h1>
+				
+			<div class="selectorInstruction">
+				<a href="#loadingAVod">
+					Loading a VOD
+				</a>
+			</div>
+			
+			<div class="selectorInstruction">
+				<a href="#gettingTheVodsChatFile">
+					Getting the VOD's chat file
+				</a>
+			</div>
+			
+			<div class="selectorInstruction">
+				<a href="#downloadingResources">
+					Downloading Resources
+				</a>
+			</div>
+		</div>
+		
+		<hr>
+		
+		<div class="instructionBlock">
+			<h1 class="title" id="loadingAVod">
+				Loading a VOD
+			</h1>
+			<p class="subtitle">
+				To load a VOD, open its video file.
+			</p>
+			<div class="instructions">
+				<ul>
+				  <li class="step">Click 'Media'</li>
+				  <li class="step">Click 'Open VOD'</li>
+				  <li class="step">Select the video file of the VOD</li>
+				</ul>
+				<p class="note">
+					*VOD Downloaders, such as <a href="github.com/Franiac/TwitchLeecher/releases">Twitch Leecher by Franiac</a>, 
+					can be used to download the video file of a VOD.
+				</p>
+				<p class="note">
+					*The VOD's chat filename must be the same as the VOD's video filename,
+					and both must be in the same directory.
+				</p>
+			</div>
+		</div>
+		
+		<hr>
+		
+		<div class="instructionBlock">
+			<h1 class="title" id="gettingTheVodsChatFile">
+				Getting the VOD's chat file
+			</h1>
+			<p class="subtitle">
+				To watch VODs along with the chat, you must first download its json chat log and convert it to the proper format (.cht).
+				Both can be done automatically by the program.
+			</p>
+			<ul>
+			  <li class="step">Click 'Chat'</li>
+			  <li class="step">Click 'Download / Create Chat File'</li>
+			  <li class="step">Set the Output Directory of the converted chat file</li>
+					<p class="note">
+						*Make sure it's in the same directory of the VOD's video file for it to be loaded.
+					</p>
+					<p class="note">
+						*By default, if a VOD has already been loaded into the player, the Output Directory will be set to the video file's directory.
+					</p>
+				<li class="step">If you already have the json chat log, uncheck 'Use VOD ID to download Chat File' and open the json chat log.</li>
+				<li class="step">If you don't have the json chat log, check 'Use VOD ID to download Chat File', then input the ID of the VOD and the program will download it.</li>
+				<li class="step">If your video file doesn't start or end at the same time as the actual VOD on Twitch then check 'Set begin/end time' and
+					input the Begin time and the End time of the video file. This will sync up the chat with the video.</li>
+					<p class="note">
+						*Unchecking 'Set begin/end time' will download the entire chat log of the VOD.
+					</p>
+				<li class="step">Finally, click the 'Create Chat File' button</li>
+			</ul>
+			<p class="note">
+				*If a VOD has already been loaded into the player, the created chat file will automatically have the same filename as the video file, and the program will autoamtically load it
+			</p><p class="note">
+				*Otherwise, if a VOD hasn't been loaded yet into the player, the created chat file will have the VOD ID as its filename. Make sure to change this to the filename of the associated video file, and that they are in the same directory.
+			</p>
+		</div>
+		
+		<hr>
+		
+		<div class="instructionBlock">
+			<h1 class="title" id="downloadingResources">
+				Downloading Resources (BTTV Emotes, FFZ Emotes, and Channel Badges)
+			</h1>
+			<p class="subtitle">
+				For the chat to use BTTV Emotes, FFZ Emotes, and the channel's badges, you must first download them.
+			</p>
+			<ul>
+				<li class="step">Click 'Resources'</li>
+				<li class="step">Click 'Download Resources'</li>
+				<li class="step">Input the name of the channel whose emotes and badges you wish to download.</li>
+				<li class="step">Click the 'Download Resources' button</li>
+			</ul>
+			<p class="note">
+				*The chat will automatically use these resources.
+			</p>
+		</div>
+		
+		<hr>
+		
+	</body>
+</html>

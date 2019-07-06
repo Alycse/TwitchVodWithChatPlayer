@@ -1,0 +1,16 @@
+body{
+	background-color: rgb(35,35,35);
+	overflow: visible;
+}
+#chatBox{
+	color: white;
+	font-size: 80%;
+	font-family: Arial; 
+	font-weight: 800;
+
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
