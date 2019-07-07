@@ -5,11 +5,17 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
 namespace TwitchVodPlayer.Chat {
     class MessageParser {
+
+        //Fields
+
+        private readonly int parsingWordMaxLength = 20;
+        private readonly int parsingWordMinLength = 3;
 
         //Initialization
 
@@ -52,8 +58,14 @@ namespace TwitchVodPlayer.Chat {
             string convertedMessageBody = "";
             string convertedMessageBodyWord;
 
-            foreach (string messageBodyWord in messageBody.Split(' ')) {
+            string[] messageBodyWords = messageBody.Split(' ');
+
+            foreach (string messageBodyWord in messageBodyWords) {
                 convertedMessageBodyWord = messageBodyWord + " ";
+                if (messageBodyWord == "" || messageBodyWord.Length > parsingWordMaxLength || messageBodyWord.Length < parsingWordMinLength) {
+                    convertedMessageBody += convertedMessageBodyWord;
+                    continue;
+                }
                 foreach (KeyValuePair<string, string> emoticonPair in emoticonDictionary) {
                     string emoticonPath;
                     string emoticonFileName = HttpUtility.UrlEncode(emoticonPair.Key);
@@ -63,11 +75,9 @@ namespace TwitchVodPlayer.Chat {
                         emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + channelId + @"/" + emoticonFileName + Fetching.Constants.EmoticonFileExtension;
                     }
 
-                    Task.Run(() => {
-                        if (!File.Exists(emoticonPath)) {
-                            emoticonDownloader.DownloadEmoticon(emoticonPair.Value, emoticonPath);
-                        }
-                    });
+                    if (!File.Exists(emoticonPath)) {
+                        emoticonDownloader.DownloadEmoticon(emoticonPair.Value, emoticonPath);
+                    }
 
                     if (messageBodyWord == emoticonPair.Key) {
                         convertedMessageBodyWord = 
@@ -91,7 +101,6 @@ namespace TwitchVodPlayer.Chat {
                 return convertedBadgeBody;
             }
             foreach (dynamic userBadge in userBadges) {
-
                 if (deserializedBadgeSet["badge_sets"][userBadge._id.ToString()] == null || deserializedBadgeSet["badge_sets"][userBadge._id.ToString()]["versions"][userBadge.version.ToString()] == null) {
                     continue;
                 }
@@ -108,11 +117,9 @@ namespace TwitchVodPlayer.Chat {
                     badgePath = Fetching.Constants.BadgesPath + channelId + @"/" + badgeFileName + Fetching.Constants.BadgeFileExtension;
                 }
 
-                Task.Run(() => {
-                    if (!File.Exists(badgePath)) {
-                        badgeDownloader.DownloadBadge(badgeUrl, badgePath);
-                    }
-                });
+                if (!File.Exists(badgePath)) {
+                    badgeDownloader.DownloadBadge(badgeUrl, badgePath);
+                }
 
                 string htmlImageTag = Chat.Constants.HtmlImageTagBegin + badgePath + Chat.Constants.HtmlImageTagEnd;
                 convertedBadgeBody += htmlImageTag;

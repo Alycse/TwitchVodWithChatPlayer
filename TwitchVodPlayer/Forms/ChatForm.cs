@@ -97,6 +97,8 @@ namespace TwitchVodPlayer.Forms {
 
         //Private Fields
 
+        private readonly int chatBoxUpdateTimerIntervalMilliseconds = 10;
+
         private readonly int maxSavedOffsetsCount = 20;
 
         private readonly int chatBoxDistance = -15;
@@ -480,7 +482,7 @@ namespace TwitchVodPlayer.Forms {
             if (chatBoxUpdateTimer == null) {
                 chatBoxUpdateTimer = new System.Windows.Forms.Timer();
                 chatBoxUpdateTimer.Tick += new EventHandler(chatBoxUpdateTimer_Tick);
-                chatBoxUpdateTimer.Interval = 10;
+                chatBoxUpdateTimer.Interval = chatBoxUpdateTimerIntervalMilliseconds;
             }
         }
 
