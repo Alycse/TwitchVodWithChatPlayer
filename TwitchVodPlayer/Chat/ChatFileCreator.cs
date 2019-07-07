@@ -100,7 +100,7 @@ namespace TwitchVodPlayer.Chat {
                 BroadcastErrorOccuredCreatingChatFileEvent("Your Twitch Client ID hasn't been set up yet.\nPlease set up your Client ID first before creating a VOD Set.");
                 CurrentlyCreatingChatFile = false;
                 return;
-            } else if (setTime && (beginTime == null || endTime == null)) {
+            } else if (setTime && (beginTime == null || endTime == null || endTime <= beginTime)) {
                 BroadcastErrorOccuredCreatingChatFileEvent("Invalid Begin Time or End Time.");
                 CurrentlyCreatingChatFile = false;
                 return;

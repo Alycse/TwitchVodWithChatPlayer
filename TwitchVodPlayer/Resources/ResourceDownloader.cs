@@ -63,6 +63,12 @@ namespace TwitchVodPlayer.Resources {
 
             BroadcastDownloadingResourcesEvent("Downloading selected resources...");
 
+            if (channelName == "") {
+                BroadcastErrorOccuredDownloadingResourcesEvent("Channel name must not be empty.");
+                CurrentlyDownloadingResources = false;
+                return;
+            }
+
             if (Properties.Settings.Default.ClientId == "") {
                 BroadcastErrorOccuredDownloadingResourcesEvent("Your Twitch Client ID hasn't been set up yet.\n" +
                     "Please set up your Client ID first before downloading resources!");

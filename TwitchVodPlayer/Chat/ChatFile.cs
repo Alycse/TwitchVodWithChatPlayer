@@ -8,7 +8,11 @@ namespace TwitchVodPlayer.Chat {
 
         public ChatFile(string filePath) {
             using (StreamReader reader = new StreamReader(filePath)) {
-                this.channelId = reader.ReadLine().Split(new char[] { ':' })[1];
+                try {
+                    this.channelId = reader.ReadLine().Split(new char[] { ':' })[1];
+                } catch {
+                    this.channelId = "";
+                }
             }
             this.filePath = filePath;
         }
