@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using Ookii.Dialogs.Wpf;
 
 namespace TwitchVodPlayer.Forms {
@@ -179,6 +180,7 @@ namespace TwitchVodPlayer.Forms {
         private void ChatFileCreatorForm_CreatingChatFile(object sender, Chat.EventHandlers.CreatingChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = 0;
+                TaskbarManager.Instance.SetProgressValue(progressBar.Value, 100, Forms.MainForm.Instance.Handle);
 
                 infoTextBox.Text = e.Message;
 
@@ -188,6 +190,7 @@ namespace TwitchVodPlayer.Forms {
         private void ChatFileCreatorForm_NewProgressCreatingChatFile(object sender, Chat.EventHandlers.NewProgressCreatingChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = Math.Min(e.Progress, 100);
+                TaskbarManager.Instance.SetProgressValue(progressBar.Value, 100, Forms.MainForm.Instance.Handle);
 
                 infoTextBox.Text = e.Message;
             }));
@@ -195,6 +198,7 @@ namespace TwitchVodPlayer.Forms {
         private void ChatFileCreatorForm_CreatedChatFile(object sender, Chat.EventHandlers.CreatedChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = 100;
+                TaskbarManager.Instance.SetProgressValue(0, 100, Forms.MainForm.Instance.Handle);
 
                 infoTextBox.Text = e.Message;
 
@@ -213,6 +217,7 @@ namespace TwitchVodPlayer.Forms {
                 infoTextBox.Text = e.Message;
 
                 progressBar.Value = 0;
+                TaskbarManager.Instance.SetProgressValue(0, 100, Forms.MainForm.Instance.Handle);
 
                 ((Chat.ChatFileCreator)sender).CreatingChatFile -= ChatFileCreatorForm_CreatingChatFile;
                 ((Chat.ChatFileCreator)sender).NewProgressCreatingChatFile -= ChatFileCreatorForm_NewProgressCreatingChatFile;
