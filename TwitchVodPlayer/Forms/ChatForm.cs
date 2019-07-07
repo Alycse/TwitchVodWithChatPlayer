@@ -234,6 +234,10 @@ namespace TwitchVodPlayer.Forms {
             }
         }
 
+        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e) {
+            Application.Exit();
+        }
+
         //Methods
 
         private void MainForm_MovingSeekBar(object sender, Forms.EventHandlers.MovingSeekBarEventArgs e) {

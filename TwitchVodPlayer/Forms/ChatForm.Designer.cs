@@ -81,6 +81,7 @@
             this.MinimizeBox = false;
             this.Name = "ChatForm";
             this.Text = "Chat";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatForm_FormClosing);
             this.Load += new System.EventHandler(this.ChatForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.draggerBox)).EndInit();
             this.ResumeLayout(false);
