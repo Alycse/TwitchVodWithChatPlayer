@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TwitchVodPlayer.Chat {
@@ -7,7 +8,17 @@ namespace TwitchVodPlayer.Chat {
 
         //Fields
 
-        public bool CurrentlyCreatingChatFile = false;
+        private static bool currentlyCreatingChatFile = false;
+        public static bool CurrentlyCreatingChatFile {
+            get {
+                return currentlyCreatingChatFile;
+            }
+            set {
+                currentlyCreatingChatFile = value;
+            }
+        }
+
+        public static CancellationTokenSource CreateChatFileTokenSource = new CancellationTokenSource();
 
         //Events
 
@@ -55,8 +66,14 @@ namespace TwitchVodPlayer.Chat {
 
         //Methods
 
+        public void Cancel() {
+            CreateChatFileTokenSource.Cancel();
+        }
+
         public async void CreateChatFile(string outputPath, string chatLogFilePath, string vodId,
             bool useVodId, bool setTime, TimeSpan? beginTime, TimeSpan? endTime, Video.VideoFile currentVideo = null) {
+
+            CreateChatFileTokenSource = new CancellationTokenSource();
 
             if (CurrentlyCreatingChatFile) {
                 return;
@@ -105,6 +122,15 @@ namespace TwitchVodPlayer.Chat {
                 }
             }
 
+            if (CreateChatFileTokenSource.IsCancellationRequested) {
+                if (File.Exists(chatLogFilePath)) {
+                    File.Delete(chatLogFilePath);
+                }
+                BroadcastErrorOccuredCreatingChatFileEvent("Creation of chat file was cancelled.");
+                CurrentlyCreatingChatFile = false;
+                return;
+            }
+
             string chatOutputFilePath;
             if (currentVideo != null) {
                 chatOutputFilePath = outputPath + @"\" + Path.GetFileNameWithoutExtension(currentVideo.FilePath) + Chat.Constants.ChatFileExtension;
@@ -116,11 +142,20 @@ namespace TwitchVodPlayer.Chat {
                 //This creates the .cht Chat File
                 await Task.Run(() => ConvertChatLog(chatLogFilePath, chatOutputFilePath, beginTime, endTime));
 
-                if (useVodId) {
+                if (useVodId && File.Exists(chatLogFilePath)) {
                     File.Delete(chatLogFilePath);
                 }
             } catch (Exception e) {
                 BroadcastErrorOccuredCreatingChatFileEvent("Error occured converting chat log: " + e.Message);
+                CurrentlyCreatingChatFile = false;
+                return;
+            }
+
+            if (CreateChatFileTokenSource.IsCancellationRequested) {
+                if (File.Exists(chatLogFilePath)) {
+                    File.Delete(chatLogFilePath);
+                }
+                BroadcastErrorOccuredCreatingChatFileEvent("Creation of chat file was cancelled.");
                 CurrentlyCreatingChatFile = false;
                 return;
             }
@@ -147,25 +182,29 @@ namespace TwitchVodPlayer.Chat {
         private void ConvertChatLog(string chatLogFilePath, string outputFilePath, TimeSpan? beginTime, TimeSpan? endTime) {
             Chat.ChatLogConverter chatLogConverter = new Chat.ChatLogConverter();
 
-            chatLogConverter.NewProgressConvertingChatLog += ChatFileCreator_NewProgress;
+            chatLogConverter.NewProgressConvertingChatLog += chatLogConverter_NewProgress;
 
-            chatLogConverter.ConvertChatLog(chatLogFilePath, outputFilePath, beginTime, endTime);
+            chatLogConverter.ConvertChatLog(CreateChatFileTokenSource.Token, chatLogFilePath, outputFilePath, beginTime, endTime);
 
-            chatLogConverter.NewProgressConvertingChatLog -= ChatFileCreator_NewProgress;
+            chatLogConverter.NewProgressConvertingChatLog -= chatLogConverter_NewProgress;
         }
 
-        private void ChatFileCreator_NewProgress(object sender, dynamic e) {
+        private void rechat_NewProgress(object sender, dynamic e) {
+            BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress);
+        }
+
+        private void chatLogConverter_NewProgress(object sender, dynamic e) {
             BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress);
         }
 
         private void DownloadChatLogFileUsingVodId(string chatLogFilePath, string vodId, TimeSpan? beginTime, TimeSpan? endTime) {
             Fetching.RechatTool.Rechat rechat = new Fetching.RechatTool.Rechat();
 
-            rechat.NewProgressDownloadingChatLog += ChatFileCreator_NewProgress;
+            rechat.NewProgressDownloadingChatLog += rechat_NewProgress;
 
-            rechat.DownloadFile(long.Parse(vodId), chatLogFilePath, beginTime, endTime);
+            rechat.DownloadFile(CreateChatFileTokenSource.Token, long.Parse(vodId), chatLogFilePath, beginTime, endTime);
 
-            rechat.NewProgressDownloadingChatLog -= ChatFileCreator_NewProgress;
+            rechat.NewProgressDownloadingChatLog -= rechat_NewProgress;
         }
 
     }

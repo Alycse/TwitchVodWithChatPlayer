@@ -178,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(543, 333);
+            this.ClientSize = new System.Drawing.Size(543, 341);
             this.Controls.Add(this.infoTextBox);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.downloadResourcesButton);

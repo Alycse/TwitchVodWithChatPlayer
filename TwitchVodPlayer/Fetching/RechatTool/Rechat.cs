@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace TwitchVodPlayer.Fetching.RechatTool {
 
@@ -60,9 +61,9 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
             OnErrorOccuredDownloadingChatLog(this, e);
         }
 
-        public void DownloadFile(long videoId, string path, TimeSpan? beginTime, TimeSpan? endTime, bool overwrite = false, DownloadProgressCallback progressCallback = null) {
-            if (File.Exists(path) && !overwrite) {
-                throw new Exception("Output file already exists.");
+        public void DownloadFile(CancellationToken token, long videoId, string path, TimeSpan? beginTime, TimeSpan? endTime) {
+            if (File.Exists(path)) {
+                File.Delete(path);
             }
             string baseUrl = $"{"https"}://api.twitch.tv/v5/videos/{videoId}/comments";
             string nextCursor = null;
@@ -73,6 +74,10 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
             using (var writer = new JsonTextWriter(new StreamWriter(path, false, new UTF8Encoding(true)))) {
                 writer.WriteStartArray();
                 do {
+                    if (token.IsCancellationRequested) {
+                        break;
+                    }
+
                     TimeSpan? lastCommentTimespan = TryGetContentOffset(lastComment);
 
                     bool lastCommentWithinTimeFrame = lastCommentTimespan > beginTime && lastCommentTimespan < endTime;
@@ -132,6 +137,8 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
                     throw new WarningException("Unable to set file created/modified time.", ex);
                 }
             }
+
+            Console.WriteLine("BROKEN RECHAT");
         }
 
         private static string DownloadUrlAsString(string url, Action<HttpWebRequest> withRequest = null) {

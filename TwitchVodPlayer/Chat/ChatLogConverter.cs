@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace TwitchVodPlayer.Chat {
     class ChatLogConverter {
@@ -54,7 +55,7 @@ namespace TwitchVodPlayer.Chat {
 
         //Methods
 
-        public void ConvertChatLog(string chatLogFilePath, string outputFilePath, TimeSpan? beginTime, TimeSpan? endTime) {
+        public void ConvertChatLog(CancellationToken token, string chatLogFilePath, string outputFilePath, TimeSpan? beginTime, TimeSpan? endTime) {
             using (WebClient client = new WebClient()) {
                 using (Stream stream = client.OpenRead(chatLogFilePath)) {
                     using (StreamReader streamReader = new StreamReader(stream)) {
@@ -83,6 +84,10 @@ namespace TwitchVodPlayer.Chat {
                                 dynamic tempChatLine;
 
                                 while (jsonTextReader.Read()) {
+                                    if (token.IsCancellationRequested) {
+                                        break;
+                                    }
+
                                     //Go to the first array in the json file
                                     if (jsonTextReader.TokenType == JsonToken.StartArray && !insideArray) {
                                         insideArray = true;
@@ -143,6 +148,7 @@ namespace TwitchVodPlayer.Chat {
                     }
                 }
             }
+            Console.WriteLine("BROKEN CONVERTER");
         }
 
     }

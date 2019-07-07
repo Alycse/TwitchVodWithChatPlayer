@@ -57,6 +57,9 @@ namespace TwitchVodPlayer.Forms {
         private Point unsetTimeProgressBarButtonLocation;
         private Size unsetTimeFormSize;
 
+        private string originalCreateChatFileButtonText;
+        private string cancelCreateChatFileButtonText = "Cancel";
+
         //Initialization
 
         public ChatFileCreatorForm() {
@@ -75,6 +78,8 @@ namespace TwitchVodPlayer.Forms {
             unsetTimeCreateChatFileButtonLocation = new Point(originalCreateChatFileButtonLocation.X, originalCreateChatFileButtonLocation.Y - setTimeControlsHeight);
             unsetTimeProgressBarButtonLocation = new Point(originalProgressBarButtonLocation.X, originalProgressBarButtonLocation.Y - setTimeControlsHeight);
             unsetTimeFormSize = new Size(originalFormSize.Width, originalFormSize.Height - setTimeControlsHeight);
+
+            originalCreateChatFileButtonText = createChatFileButton.Text;
 
             UseVodId(true);
             SetTime(false);
@@ -170,25 +175,28 @@ namespace TwitchVodPlayer.Forms {
 
                 infoTextBox.Text = e.Message;
 
-                createChatFileButton.Enabled = false;
+                createChatFileButton.Text = cancelCreateChatFileButtonText;
             }));
         }
         private void ChatFileCreatorForm_NewProgressCreatingChatFile(object sender, Chat.EventHandlers.NewProgressCreatingChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = Math.Min(e.Progress, 100);
+
                 infoTextBox.Text = e.Message;
             }));
         }
         private void ChatFileCreatorForm_CreatedChatFile(object sender, Chat.EventHandlers.CreatedChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
+                progressBar.Value = 100;
+
                 infoTextBox.Text = e.Message;
 
                 ((Chat.ChatFileCreator)sender).CreatingChatFile -= ChatFileCreatorForm_CreatingChatFile;
                 ((Chat.ChatFileCreator)sender).NewProgressCreatingChatFile -= ChatFileCreatorForm_NewProgressCreatingChatFile;
                 ((Chat.ChatFileCreator)sender).CreatedChatFile -= ChatFileCreatorForm_CreatedChatFile;
                 ((Chat.ChatFileCreator)sender).ErrorOccuredCreatingChatFile -= ChatFileCreatorForm_ErrorOccuredCreatingChatFile;
-                
-                createChatFileButton.Enabled = true;
+
+                createChatFileButton.Text = originalCreateChatFileButtonText;
 
                 BroadcastCreatedChatFileEvent();
             }));
@@ -203,32 +211,37 @@ namespace TwitchVodPlayer.Forms {
                 ((Chat.ChatFileCreator)sender).NewProgressCreatingChatFile -= ChatFileCreatorForm_NewProgressCreatingChatFile;
                 ((Chat.ChatFileCreator)sender).CreatedChatFile -= ChatFileCreatorForm_CreatedChatFile;
                 ((Chat.ChatFileCreator)sender).ErrorOccuredCreatingChatFile -= ChatFileCreatorForm_ErrorOccuredCreatingChatFile;
-                
-                createChatFileButton.Enabled = true;
+
+                createChatFileButton.Text = originalCreateChatFileButtonText;
             }));
         }
 
         private void CreateChatFileButton_Click(object sender, EventArgs e) {
             Chat.ChatFileCreator chatFileCreator = new Chat.ChatFileCreator();
 
-            chatFileCreator.CreatingChatFile += ChatFileCreatorForm_CreatingChatFile;
-            chatFileCreator.NewProgressCreatingChatFile += ChatFileCreatorForm_NewProgressCreatingChatFile;
-            chatFileCreator.CreatedChatFile += ChatFileCreatorForm_CreatedChatFile;
-            chatFileCreator.ErrorOccuredCreatingChatFile += ChatFileCreatorForm_ErrorOccuredCreatingChatFile;
+            if (!Chat.ChatFileCreator.CurrentlyCreatingChatFile) {
+                chatFileCreator.CreatingChatFile += ChatFileCreatorForm_CreatingChatFile;
+                chatFileCreator.NewProgressCreatingChatFile += ChatFileCreatorForm_NewProgressCreatingChatFile;
+                chatFileCreator.CreatedChatFile += ChatFileCreatorForm_CreatedChatFile;
+                chatFileCreator.ErrorOccuredCreatingChatFile += ChatFileCreatorForm_ErrorOccuredCreatingChatFile;
 
-            TimeSpan? beginTime;
-            TimeSpan? endTime;
+                TimeSpan? beginTime;
+                TimeSpan? endTime;
 
-            if (setTimeCheckBox.Checked) {
-                beginTime = new TimeSpan(beginHoursNumBox.Value, beginMinutesNumBox.Value, beginSecondsNumBox.Value);
-                endTime = new TimeSpan(endHoursNumBox.Value, endMinutesNumBox.Value, endSecondsNumBox.Value);
+                if (setTimeCheckBox.Checked) {
+                    beginTime = new TimeSpan(beginHoursNumBox.Value, beginMinutesNumBox.Value, beginSecondsNumBox.Value);
+                    endTime = new TimeSpan(endHoursNumBox.Value, endMinutesNumBox.Value, endSecondsNumBox.Value);
+                } else {
+                    beginTime = null;
+                    endTime = null;
+                }
+
+                chatFileCreator.CreateChatFile(outputPathTextBox.Text, chatLogFilePathTextBox.Text,
+                    vodIdTextBox.Text, useVodIdCheckBox.Checked, setTimeCheckBox.Checked, beginTime, endTime, MainForm.Instance.CurrentVideo);
             } else {
-                beginTime = null;
-                endTime = null;
+                Console.WriteLine("HAPPENED 1");
+                chatFileCreator.Cancel();
             }
-
-            chatFileCreator.CreateChatFile(outputPathTextBox.Text, chatLogFilePathTextBox.Text,
-                vodIdTextBox.Text, useVodIdCheckBox.Checked, setTimeCheckBox.Checked, beginTime, endTime, MainForm.Instance.CurrentVideo);
         }
 
         private void OpenChatLogFileButton_Click(object sender, EventArgs e) {

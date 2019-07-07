@@ -69,12 +69,15 @@ namespace TwitchVodPlayer.Forms {
         private void ResourceDownloaderForm_NewProgressDownloadingResources(object sender, Resources.EventHandlers.NewProgressDownloadingResourcesEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = Math.Min(e.Progress, 100);
+
                 infoTextBox.Text = e.Message;
             }));
         }
         private void ResourceDownloaderForm_DownloadedResources(object sender, Resources.EventHandlers.DownloadedResourcesEventArgs e) {
             Instance.Invoke(new Action(() => {
                 infoTextBox.Text = e.Message;
+
+                progressBar.Value = 100;
 
                 BroadcastDownloadedResourcesEvent();
 

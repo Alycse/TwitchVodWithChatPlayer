@@ -342,7 +342,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(360, 401);
+            this.ClientSize = new System.Drawing.Size(360, 408);
             this.Controls.Add(this.setTimeCheckBox);
             this.Controls.Add(this.setOutputPathButton);
             this.Controls.Add(this.outputPathTextBox);
