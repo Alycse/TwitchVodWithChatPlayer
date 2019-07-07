@@ -509,8 +509,8 @@ namespace TwitchVodPlayer.Forms {
 
         private void UpdateVideoSeekBarFromVideoPlayerCurrentPosition() {
             if (!IsVideoSeekBarClicked && videoSeekBar.Value != (int)(videoPlayer.Ctlcontrols.currentPosition)) {
-                TimeSpan videoPlayerTimeSpan = TimeSpan.FromSeconds((int)videoPlayerTime);
-                if (videoPlayerTime >= 0 && videoPlayerTimeSpan <= CurrentVideo.EndTime) {
+                TimeSpan videoPlayerTimeSpan = TimeSpan.FromSeconds((int)VideoPlayerTime);
+                if (VideoPlayerTime >= 0 && videoPlayerTimeSpan <= CurrentVideo.EndTime) {
                     timeLabel.Text = videoPlayerTimeSpan + " / " + CurrentVideo.EndTime;
                 }
                 videoSeekBar.Value = (int)(videoPlayer.Ctlcontrols.currentPosition);
@@ -644,7 +644,7 @@ namespace TwitchVodPlayer.Forms {
             ForwardVideoPlayerTime(Video.Constants.BackwardMilliseconds);
         }
 
-        public void ForwardVideoPlayerTime(long timeAdded) {
+        public void ForwardVideoPlayerTime(double timeAdded) {
             VideoPlayerTime += timeAdded;
             BroadcastMovingSeekBarEvent(videoSeekBar.Value);
         }
