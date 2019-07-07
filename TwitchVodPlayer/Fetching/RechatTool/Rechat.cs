@@ -86,7 +86,7 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
                         BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
                         "\nSegments downloaded: " + segmentCount +
                         "\nCurrent time: " + (lastCommentTimespan),
-                        (segmentCount % 5) * 20);
+                        (segmentCount % 10) * 10);
                     }
 
                     if (beginTime != null && endTime != null && lastCommentTimespan > endTime) {
