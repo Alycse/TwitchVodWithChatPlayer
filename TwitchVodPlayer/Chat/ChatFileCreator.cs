@@ -155,6 +155,9 @@ namespace TwitchVodPlayer.Chat {
                 if (File.Exists(chatLogFilePath)) {
                     File.Delete(chatLogFilePath);
                 }
+                if (File.Exists(chatOutputFilePath)) {
+                    File.Delete(chatOutputFilePath);
+                }
                 BroadcastErrorOccuredCreatingChatFileEvent("Creation of chat file was cancelled.");
                 CurrentlyCreatingChatFile = false;
                 return;
