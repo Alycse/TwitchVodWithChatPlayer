@@ -58,13 +58,13 @@ namespace TwitchVodPlayer.Forms {
             this.chatOffsetLabel = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.videoPlayerPanel = new System.Windows.Forms.Panel();
-            this.videoVolumeBar = new TwitchVodPlayer.Controls.ColoredProgressBar();
             this.videoVolumeIconBox = new System.Windows.Forms.PictureBox();
+            this.loadingVideoLabel = new System.Windows.Forms.Label();
+            this.transparentPanel1 = new TwitchVodPlayer.Controls.TransparentPanel();
+            this.videoVolumeBar = new TwitchVodPlayer.Controls.ColoredProgressBar();
             this.videoFullscreenButton = new TwitchVodPlayer.Controls.UnfocusableButton();
             this.videoSeekBar = new TwitchVodPlayer.Controls.ColoredProgressBar();
             this.videoPlaybackButton = new TwitchVodPlayer.Controls.UnfocusableButton();
-            this.loadingVideoLabel = new System.Windows.Forms.Label();
-            this.transparentPanel1 = new TwitchVodPlayer.Controls.TransparentPanel();
             this.transparentPanelCover = new TwitchVodPlayer.Controls.TransparentPanel();
             this.menuStrip.SuspendLayout();
             this.videoPlayerPanel.SuspendLayout();
@@ -318,7 +318,7 @@ namespace TwitchVodPlayer.Forms {
             // timeLabel
             // 
             this.timeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.timeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.timeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(163)))), ((int)(((byte)(227)))));
             this.timeLabel.Location = new System.Drawing.Point(516, -1);
@@ -331,7 +331,7 @@ namespace TwitchVodPlayer.Forms {
             // 
             // videoPlayerPanel
             // 
-            this.videoPlayerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.videoPlayerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.videoPlayerPanel.Controls.Add(this.videoVolumeBar);
             this.videoPlayerPanel.Controls.Add(this.videoVolumeIconBox);
             this.videoPlayerPanel.Controls.Add(this.videoFullscreenButton);
@@ -344,6 +344,54 @@ namespace TwitchVodPlayer.Forms {
             this.videoPlayerPanel.Size = new System.Drawing.Size(779, 36);
             this.videoPlayerPanel.TabIndex = 9;
             this.videoPlayerPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.VideoPlayerPanel_MouseMove);
+            // 
+            // videoVolumeIconBox
+            // 
+            this.videoVolumeIconBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.videoVolumeIconBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.videoVolumeIconBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.videoVolumeIconBox.Image = global::TwitchVodPlayer.Properties.Resources.Volume2;
+            this.videoVolumeIconBox.Location = new System.Drawing.Point(688, 5);
+            this.videoVolumeIconBox.Name = "videoVolumeIconBox";
+            this.videoVolumeIconBox.Size = new System.Drawing.Size(25, 25);
+            this.videoVolumeIconBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.videoVolumeIconBox.TabIndex = 14;
+            this.videoVolumeIconBox.TabStop = false;
+            this.videoVolumeIconBox.Click += new System.EventHandler(this.VideoVolumeIconBox_Click);
+            // 
+            // loadingVideoLabel
+            // 
+            this.loadingVideoLabel.AutoSize = true;
+            this.loadingVideoLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.loadingVideoLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadingVideoLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.loadingVideoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.loadingVideoLabel.Location = new System.Drawing.Point(0, 24);
+            this.loadingVideoLabel.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.loadingVideoLabel.Name = "loadingVideoLabel";
+            this.loadingVideoLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.loadingVideoLabel.Size = new System.Drawing.Size(133, 23);
+            this.loadingVideoLabel.TabIndex = 11;
+            this.loadingVideoLabel.Text = "Loading Video...";
+            this.loadingVideoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // transparentPanel1
+            // 
+            this.transparentPanel1.AllowDrop = true;
+            this.transparentPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.transparentPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.transparentPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.transparentPanel1.Location = new System.Drawing.Point(0, 24);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Opacity = 100;
+            this.transparentPanel1.Size = new System.Drawing.Size(779, 477);
+            this.transparentPanel1.TabIndex = 12;
+            this.transparentPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.transparentPanelCover_DragDrop);
+            this.transparentPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.transparentPanelCover_DragEnter);
+            this.transparentPanel1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.transparentPanelCover_MouseDoubleClick);
+            this.transparentPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.transparentPanelCover_MouseMove);
             // 
             // videoVolumeBar
             // 
@@ -363,20 +411,6 @@ namespace TwitchVodPlayer.Forms {
             this.videoVolumeBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoVolumeBar_MouseDown);
             this.videoVolumeBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.VideoVolumeBar_MouseMove);
             this.videoVolumeBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.VideoVolumeBar_MouseUp);
-            // 
-            // videoVolumeIconBox
-            // 
-            this.videoVolumeIconBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.videoVolumeIconBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.videoVolumeIconBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.videoVolumeIconBox.Image = global::TwitchVodPlayer.Properties.Resources.Volume2;
-            this.videoVolumeIconBox.Location = new System.Drawing.Point(688, 5);
-            this.videoVolumeIconBox.Name = "videoVolumeIconBox";
-            this.videoVolumeIconBox.Size = new System.Drawing.Size(25, 25);
-            this.videoVolumeIconBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.videoVolumeIconBox.TabIndex = 14;
-            this.videoVolumeIconBox.TabStop = false;
-            this.videoVolumeIconBox.Click += new System.EventHandler(this.VideoVolumeIconBox_Click);
             // 
             // videoFullscreenButton
             // 
@@ -429,40 +463,6 @@ namespace TwitchVodPlayer.Forms {
             this.videoPlaybackButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.videoPlaybackButton.UseVisualStyleBackColor = true;
             this.videoPlaybackButton.Click += new System.EventHandler(this.VideoPlaybackButton_Click);
-            // 
-            // loadingVideoLabel
-            // 
-            this.loadingVideoLabel.AutoSize = true;
-            this.loadingVideoLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.loadingVideoLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadingVideoLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.loadingVideoLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.loadingVideoLabel.Location = new System.Drawing.Point(0, 24);
-            this.loadingVideoLabel.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.loadingVideoLabel.Name = "loadingVideoLabel";
-            this.loadingVideoLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.loadingVideoLabel.Size = new System.Drawing.Size(133, 23);
-            this.loadingVideoLabel.TabIndex = 11;
-            this.loadingVideoLabel.Text = "Loading Video...";
-            this.loadingVideoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // transparentPanel1
-            // 
-            this.transparentPanel1.AllowDrop = true;
-            this.transparentPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.transparentPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.transparentPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentPanel1.Location = new System.Drawing.Point(0, 24);
-            this.transparentPanel1.Name = "transparentPanel1";
-            this.transparentPanel1.Opacity = 100;
-            this.transparentPanel1.Size = new System.Drawing.Size(779, 477);
-            this.transparentPanel1.TabIndex = 12;
-            this.transparentPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.transparentPanelCover_DragDrop);
-            this.transparentPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.transparentPanelCover_DragEnter);
-            this.transparentPanel1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.transparentPanelCover_MouseDoubleClick);
-            this.transparentPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.transparentPanelCover_MouseMove);
             // 
             // transparentPanelCover
             // 
