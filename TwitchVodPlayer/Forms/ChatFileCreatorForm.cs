@@ -180,7 +180,7 @@ namespace TwitchVodPlayer.Forms {
         private void ChatFileCreatorForm_CreatingChatFile(object sender, Chat.EventHandlers.CreatingChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = 0;
-                TaskbarManager.Instance.SetProgressValue(progressBar.Value, 100, Forms.MainForm.Instance.Handle);
+                TaskbarManager.Instance.SetProgressValue(0, 100, Forms.MainForm.Instance.Handle);
 
                 infoTextBox.Text = e.Message;
 
@@ -190,7 +190,7 @@ namespace TwitchVodPlayer.Forms {
         private void ChatFileCreatorForm_NewProgressCreatingChatFile(object sender, Chat.EventHandlers.NewProgressCreatingChatFileEventArgs e) {
             Instance.Invoke(new Action(() => {
                 progressBar.Value = Math.Min(e.Progress, 100);
-                TaskbarManager.Instance.SetProgressValue(progressBar.Value, 100, Forms.MainForm.Instance.Handle);
+                TaskbarManager.Instance.SetProgressValue(e.TaskBarProgress, 100, Forms.MainForm.Instance.Handle);
 
                 infoTextBox.Text = e.Message;
             }));

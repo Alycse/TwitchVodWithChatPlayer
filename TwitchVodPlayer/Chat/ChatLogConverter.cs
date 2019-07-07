@@ -36,10 +36,11 @@ namespace TwitchVodPlayer.Chat {
             e.Message = message;
             OnConvertingChatLog(this, e);
         }
-        private void BroadcastNewProgressConvertingChatLogEvent(string message, int progress) {
+        private void BroadcastNewProgressConvertingChatLogEvent(string message, int progress, int taskBarProgress) {
             Chat.EventHandlers.NewProgressConvertingChatLogEventArgs e = new Chat.EventHandlers.NewProgressConvertingChatLogEventArgs();
             e.Message = message;
             e.Progress = progress;
+            e.TaskBarProgress = taskBarProgress;
             OnNewProgressConvertingChatLog(this, e);
         }
         public void BroadcastConvertedChatLogEvent(string message) {
@@ -122,7 +123,7 @@ namespace TwitchVodPlayer.Chat {
 
                                             BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log...\n" + "Line count: " + lineCount +
                                                 "\nCurrent time: " + TimeSpan.FromMilliseconds((double)chatLine.content_offset_seconds * 1000.0),
-                                                progress);
+                                                progress, progress);
 
                                         } else if ((double)chatLine.content_offset_seconds * 1000.0 < endTime.Value.TotalMilliseconds) {
 
@@ -130,7 +131,7 @@ namespace TwitchVodPlayer.Chat {
 
                                             BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log...\n" + lineCount +
                                                 "\nCurrent time: " + TimeSpan.FromMilliseconds((double)chatLine.content_offset_seconds * 1000.0) + @" / " + endTime,
-                                                progress);
+                                                progress, progress);
 
                                         }
                                     }

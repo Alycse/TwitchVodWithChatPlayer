@@ -46,10 +46,11 @@ namespace TwitchVodPlayer.Chat {
             e.Message = message;
             OnCreatingChatFile(this, e);
         }
-        private void BroadcastNewProgressCreatingChatFileEvent(string message, int progress) {
+        private void BroadcastNewProgressCreatingChatFileEvent(string message, int progress, int taskBarProgress) {
             Chat.EventHandlers.NewProgressCreatingChatFileEventArgs e = new Chat.EventHandlers.NewProgressCreatingChatFileEventArgs();
             e.Message = message;
             e.Progress = progress;
+            e.TaskBarProgress = taskBarProgress;
             OnNewProgressCreatingChatFile(this, e);
         }
         public void BroadcastCreatedChatFileEvent(string message, string filePath) {
@@ -168,20 +169,6 @@ namespace TwitchVodPlayer.Chat {
             CurrentlyCreatingChatFile = false;
         }
 
-        private async Task<string> GetChannelId(string channelName) {
-            BroadcastNewProgressCreatingChatFileEvent("Getting Channel ID...", 25);
-
-            Fetching.Channels.ChannelFetcher channelFetcher = new Fetching.Channels.ChannelFetcher();
-
-            BroadcastNewProgressCreatingChatFileEvent("Getting Channel ID...", 50);
-
-            await Task.Run(() => channelFetcher.GetChannelJson(channelName));
-
-            BroadcastNewProgressCreatingChatFileEvent("Getting Channel ID...", 100);
-
-            return channelFetcher.GetChannelIdFromJson();
-        }
-
         private void ConvertChatLog(string chatLogFilePath, string outputFilePath, TimeSpan? beginTime, TimeSpan? endTime) {
             Chat.ChatLogConverter chatLogConverter = new Chat.ChatLogConverter();
 
@@ -193,11 +180,11 @@ namespace TwitchVodPlayer.Chat {
         }
 
         private void rechat_NewProgress(object sender, dynamic e) {
-            BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress);
+            BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress, 0);
         }
 
         private void chatLogConverter_NewProgress(object sender, dynamic e) {
-            BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress);
+            BroadcastNewProgressCreatingChatFileEvent(e.Message, e.Progress, e.TaskBarProgress);
         }
 
         private void DownloadChatLogFileUsingVodId(string chatLogFilePath, string vodId, TimeSpan? beginTime, TimeSpan? endTime) {

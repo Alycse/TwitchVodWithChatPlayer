@@ -44,10 +44,11 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
             e.Message = message;
             OnDownloadingChatLog(this, e);
         }
-        protected void BroadcastNewProgressDownloadingChatLogEvent(string message, int progress) {
+        protected void BroadcastNewProgressDownloadingChatLogEvent(string message, int progress, int taskBarProgress) {
             Fetching.RechatTool.EventHandlers.NewProgressDownloadingChatLogEventArgs e = new Fetching.RechatTool.EventHandlers.NewProgressDownloadingChatLogEventArgs();
             e.Message = message;
             e.Progress = progress;
+            e.TaskBarProgress = taskBarProgress;
             OnNewProgressDownloadingChatLog(this, e);
         }
         protected void BroadcastDownloadedChatLogEvent(string message) {
@@ -86,7 +87,7 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
                         BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
                         "\nSegments downloaded: " + segmentCount +
                         "\nCurrent time: " + (lastCommentTimespan),
-                        (segmentCount % 10) * 10);
+                        (segmentCount % 10) * 10, 0);
                     }
 
                     if (beginTime != null && endTime != null && lastCommentTimespan > endTime) {

@@ -20,6 +20,9 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
             public int Progress {
                 get; set;
             }
+            public int TaskBarProgress {
+                get; set;
+            }
         }
         public class DownloadedChatLogEventArgs : EventArgs {
             public string Message {

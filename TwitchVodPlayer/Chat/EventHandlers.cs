@@ -49,6 +49,9 @@ namespace TwitchVodPlayer.Chat {
             public int Progress {
                 get; set;
             }
+            public int TaskBarProgress {
+                get; set;
+            }
         }
         public class ConvertedChatLogEventArgs : EventArgs {
             public string Message {
@@ -76,6 +79,9 @@ namespace TwitchVodPlayer.Chat {
                 get; set;
             }
             public int Progress {
+                get; set;
+            }
+            public int TaskBarProgress {
                 get; set;
             }
         }
