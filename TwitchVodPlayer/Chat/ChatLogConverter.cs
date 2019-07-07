@@ -120,7 +120,7 @@ namespace TwitchVodPlayer.Chat {
 
                                             progress = ((int)Math.Round((float)((double)chatLine.content_offset_seconds * 1000.0)) % 10) * 10;
 
-                                            BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log..." +
+                                            BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log...\n" + "Line count: " + lineCount +
                                                 "\nCurrent time: " + TimeSpan.FromMilliseconds((double)chatLine.content_offset_seconds * 1000.0),
                                                 progress);
 
@@ -128,7 +128,7 @@ namespace TwitchVodPlayer.Chat {
 
                                             progress = (int)Math.Round((float)((double)chatLine.content_offset_seconds * 1000.0) / (float)endTime.Value.TotalMilliseconds * 100.0f);
 
-                                            BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log..." +
+                                            BroadcastNewProgressConvertingChatLogEvent("Converting Chat Log...\n" + lineCount +
                                                 "\nCurrent time: " + TimeSpan.FromMilliseconds((double)chatLine.content_offset_seconds * 1000.0) + @" / " + endTime,
                                                 progress);
 
