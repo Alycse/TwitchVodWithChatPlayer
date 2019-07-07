@@ -1,7 +1,7 @@
 # Twitch VOD with Chat Player
 Watch Twitch VODs together with Chat!
 
-![Screenshot 1](https://raw.githubusercontent.com/Alycse/TwitchVodWithChatPlayer/master/Screenshots/Screenshot-1.png)
+![Screenshot 1]()
 
 ## Purpose
 Twitch VODs that are saved on the website get deleted either after a certain amount of time or if the streamer chooses to remove it, and while there are many tools out there right now that can download VODs and their chat logs, you still can't play the VOD **while** having the chat displayed at the same time **in sync** with the current time of the video.
