@@ -137,8 +137,6 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
                     throw new WarningException("Unable to set file created/modified time.", ex);
                 }
             }
-
-            Console.WriteLine("BROKEN RECHAT");
         }
 
         private static string DownloadUrlAsString(string url, Action<HttpWebRequest> withRequest = null) {

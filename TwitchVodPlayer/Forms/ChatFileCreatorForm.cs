@@ -239,7 +239,6 @@ namespace TwitchVodPlayer.Forms {
                 chatFileCreator.CreateChatFile(outputPathTextBox.Text, chatLogFilePathTextBox.Text,
                     vodIdTextBox.Text, useVodIdCheckBox.Checked, setTimeCheckBox.Checked, beginTime, endTime, MainForm.Instance.CurrentVideo);
             } else {
-                Console.WriteLine("HAPPENED 1");
                 chatFileCreator.Cancel();
             }
         }

@@ -148,7 +148,6 @@ namespace TwitchVodPlayer.Chat {
                     }
                 }
             }
-            Console.WriteLine("BROKEN CONVERTER");
         }
 
     }
