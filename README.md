@@ -28,11 +28,11 @@ This application allows you to do just that! With this, you can permanently stor
  - Can check for new updates.
 
 ## Acknowledgements
-Thanks to jdpurcell's [RechatTool](https://github.com/jdpurcell/RechatTool), you don't have to download a separate program to get a VOD's chat log from Twitch!
+Thanks to jdpurcell's [RechatTool](https://github.com/jdpurcell/RechatTool), you don't need a separate tool to get a VOD's chat log from Twitch!
 
 ## Issues
 If you encounter any issues with the application, [please let me know](https://github.com/Alycse/TwitchVodWithChatPlayer/issues) and I'll get back to you as soon as I can!
 
 ---
 
-This is my very first full and complete program that I've publicly released *ever* outside of video games (in which I used engines for), and this is also my first time using GitHub so I'm still kind of getting used to it. I mainly developed this for educational purposes and for my own use *because I'm a huge vodfriend :)* **but** I'm still going to update it and keep it alive as much as I can, especially if there's a bug or if any of the APIs break.
+This is my very first full and complete program that I've publicly released *ever* outside of video games (in which I used engines for), and this is also my first time using GitHub so I'm still kind of getting used to it. I mainly developed this program for educational purposes and for my own use *because I'm a huge vodfriend :)* **but** I'm still going to update it and keep it alive as much as I can, especially if there's a bug or if any of the APIs break.
