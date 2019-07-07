@@ -80,7 +80,7 @@ namespace TwitchVodPlayer.Chat {
             }
             CurrentlyCreatingChatFile = true;
 
-            BroadcastCreatingChatFileEvent("Creating Chat file...");
+            BroadcastCreatingChatFileEvent("Creating Chat file...\nPlease wait while the program is connecting.");
 
             //Input validation
             if (outputPath == "") {
