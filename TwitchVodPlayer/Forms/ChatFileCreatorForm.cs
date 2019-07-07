@@ -92,6 +92,13 @@ namespace TwitchVodPlayer.Forms {
             chatLogFilePathTextBox.Text = "";
             if (MainForm.Instance.CurrentVideo != null) {
                 outputPathTextBox.Text = Path.GetDirectoryName(MainForm.Instance.CurrentVideo.FilePath);
+                string[] fileNameWords = Path.GetFileNameWithoutExtension(MainForm.Instance.CurrentVideo.FilePath).Split('_');
+                foreach (string fileNameWord in fileNameWords) {
+                    if (fileNameWord.Length == 9 && int.TryParse(fileNameWord, out int n)) {
+                        vodIdTextBox.Text = fileNameWord;
+                        break;
+                    }
+                }
             }
 
             ResetTime(MainForm.Instance.CurrentVideo);
