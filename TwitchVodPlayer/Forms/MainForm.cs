@@ -525,10 +525,10 @@ namespace TwitchVodPlayer.Forms {
 
             updateLoadingForm.Close();
 
-            if (updateUrl == "latest") {
-                MessageBox.Show("You have the latest version of Twitch VOD Player!", "Twitch VOD Player", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } else if (updateUrl == null) {
+            if (updateUrl == null) {
                 MessageBox.Show("There was a problem checking for updates.", "Twitch VOD Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else if (updateUrl == "latest") {
+                MessageBox.Show("You have the latest version of Twitch VOD Player!", "Twitch VOD Player", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } else {
                 DialogResult dialogResult = MessageBox.Show("There is a new update available.\nWould you like to download it?", "Twitch VOD Player", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes) {

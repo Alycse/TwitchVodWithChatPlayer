@@ -20,9 +20,9 @@ namespace TwitchVodPlayer.Updates {
                 var releases = await client.Repository.Release.GetAll("Alycse", "TwitchVodWithChatPlayer");
                 if (releases.Count > 0) {
                     var latestRelease = releases[0];
-                    
+
                     double currentVersion = double.Parse(TwitchVodPlayer.Helpers.ReplaceAllExceptFirstOccurence(CurrentVersion, '.'));
-                    double latestVersion = double.Parse(TwitchVodPlayer.Helpers.ReplaceAllExceptFirstOccurence(latestRelease.TagName, '.'));
+                    double latestVersion = double.Parse(TwitchVodPlayer.Helpers.ReplaceAllExceptFirstOccurence(latestRelease.TagName.Remove(0, 1), '.'));
 
                     if (latestVersion > currentVersion) {
                         return latestRelease.HtmlUrl;
@@ -31,8 +31,8 @@ namespace TwitchVodPlayer.Updates {
                     }
                 }
                 return "latest";
-            } catch (Octokit.NotFoundException e) {
-                Console.WriteLine("Error getting releases. Reason: " + e.Message);
+            } catch {
+                Console.WriteLine("Error getting releases.");
 
                 return null;
             }
