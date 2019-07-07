@@ -963,7 +963,7 @@ namespace TwitchVodPlayer.Forms {
             }
 
             Video.VideoFile video = new Video.VideoFile(filePath);
-            LoadVideo(video);
+            Task.Run(() => LoadVideo(video));
         }
 
         private void transparentPanelCover_DragEnter(object sender, System.Windows.Forms.DragEventArgs e) {
