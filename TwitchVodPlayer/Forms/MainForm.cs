@@ -899,6 +899,7 @@ namespace TwitchVodPlayer.Forms {
                 Point CP = videoSeekBar.PointToClient(Cursor.Position);
                 VideoPlayerTime = (videoSeekBar.Minimum + (videoSeekBar.Maximum - videoSeekBar.Minimum) *
                     CP.X / videoSeekBar.Width);
+                IsVideoPlayerPlaying = true;
             }
         }
 
