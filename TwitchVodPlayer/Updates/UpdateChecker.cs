@@ -16,7 +16,6 @@ namespace TwitchVodPlayer.Updates {
 
         public static async Task<string> CheckForUpdates() {
             var client = new GitHubClient(new ProductHeaderValue("TwitchVodWithChatPlayer"));
-            client.Credentials = new Credentials("05620bcb224ed0abae37d2b0ff3fa3c6d86d47f5 ");
             try {
                 var releases = await client.Repository.Release.GetAll("Alycse", "TwitchVodWithChatPlayer");
                 if (releases.Count > 0) {
@@ -31,7 +30,6 @@ namespace TwitchVodPlayer.Updates {
                         return "latest";
                     }
                 }
-
                 return "latest";
             } catch (Octokit.NotFoundException e) {
                 Console.WriteLine("Error getting releases. Reason: " + e.Message);
