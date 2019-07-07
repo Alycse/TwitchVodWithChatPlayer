@@ -647,6 +647,9 @@ namespace TwitchVodPlayer.Forms {
         public void ForwardVideoPlayerTime(double timeAdded) {
             VideoPlayerTime += timeAdded;
             BroadcastMovingSeekBarEvent(videoSeekBar.Value);
+            if (!IsVideoPlayerPlaying) {
+                IsVideoPlayerPlaying = true;
+            }
         }
         public void ToggleVideoPlayerPlayback() {
             MainForm.instance.Focus();
@@ -899,7 +902,9 @@ namespace TwitchVodPlayer.Forms {
                 Point CP = videoSeekBar.PointToClient(Cursor.Position);
                 VideoPlayerTime = (videoSeekBar.Minimum + (videoSeekBar.Maximum - videoSeekBar.Minimum) *
                     CP.X / videoSeekBar.Width);
-                IsVideoPlayerPlaying = true;
+                if (!IsVideoPlayerPlaying) {
+                    IsVideoPlayerPlaying = true;
+                }
             }
         }
 
