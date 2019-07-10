@@ -12,7 +12,7 @@ This application allows you to do just that! With this, you can permanently stor
  - .NET Framework 4.7.1 or higher
 
 ## Download
- [Twitch VOD Player can be downloaded here](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)
+ [The installers for Twitch VOD Player can be downloaded here](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)
  
 ## Features
  - Chat Box can be freely moved and resized.
@@ -35,4 +35,4 @@ If you encounter any issues with the application, [please let me know](https://g
 
 ---
 
-This is my very first full and complete program that I've publicly released *ever* outside of video games (in which I used engines for), and this is also my first time using GitHub so I'm still kind of getting used to it. I mainly developed this program for educational purposes and for my own use *because I'm a huge vodfriend :)* **but** I'm still going to update it and keep it alive as much as I can, especially if there's a bug or if any of the APIs break.
+This is my very first full and complete program that I've publicly released *ever* outside of video games (in which I used engines for), and this is also my first time using GitHub so I'm still kind of getting used to it. I mainly developed this program for educational purposes and for my own use *because I'm a vodfriend and I HATE having to deal with VODs that I'm watching being suddenly deleted*, **but** I'm still going to update it and keep it alive as much as I can, especially if there's a bug or if any of the APIs break.
