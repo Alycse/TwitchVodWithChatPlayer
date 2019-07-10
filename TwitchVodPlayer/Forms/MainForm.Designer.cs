@@ -193,20 +193,20 @@ namespace TwitchVodPlayer.Forms {
             // downloadCreateChatFileToolStripMenuItem
             // 
             this.downloadCreateChatFileToolStripMenuItem.Name = "downloadCreateChatFileToolStripMenuItem";
-            this.downloadCreateChatFileToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.downloadCreateChatFileToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.downloadCreateChatFileToolStripMenuItem.Text = "Download / Create Chat File";
             this.downloadCreateChatFileToolStripMenuItem.Click += new System.EventHandler(this.DownloadCreateChatFileToolStripMenuItem_Click);
             // 
             // chatToolStripSeparator1
             // 
             this.chatToolStripSeparator1.Name = "chatToolStripSeparator1";
-            this.chatToolStripSeparator1.Size = new System.Drawing.Size(262, 6);
+            this.chatToolStripSeparator1.Size = new System.Drawing.Size(261, 6);
             // 
             // increaseChatOffsetToolStripMenuItem
             // 
             this.increaseChatOffsetToolStripMenuItem.Name = "increaseChatOffsetToolStripMenuItem";
             this.increaseChatOffsetToolStripMenuItem.ShortcutKeyDisplayString = "P";
-            this.increaseChatOffsetToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.increaseChatOffsetToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.increaseChatOffsetToolStripMenuItem.Text = "Increase Chat Offset";
             this.increaseChatOffsetToolStripMenuItem.Click += new System.EventHandler(this.IncreaseChatOffsetToolStripMenuItem_Click);
             // 
@@ -214,20 +214,20 @@ namespace TwitchVodPlayer.Forms {
             // 
             this.decreaseChatOffsetToolStripMenuItem.Name = "decreaseChatOffsetToolStripMenuItem";
             this.decreaseChatOffsetToolStripMenuItem.ShortcutKeyDisplayString = "O";
-            this.decreaseChatOffsetToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.decreaseChatOffsetToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.decreaseChatOffsetToolStripMenuItem.Text = "Decrease Chat Offset";
             this.decreaseChatOffsetToolStripMenuItem.Click += new System.EventHandler(this.DecreaseChatOffsetToolStripMenuItem_Click);
             // 
             // chatToolStripSeparator2
             // 
             this.chatToolStripSeparator2.Name = "chatToolStripSeparator2";
-            this.chatToolStripSeparator2.Size = new System.Drawing.Size(262, 6);
+            this.chatToolStripSeparator2.Size = new System.Drawing.Size(261, 6);
             // 
             // hideChatBoxToolStripMenuItem
             // 
             this.hideChatBoxToolStripMenuItem.Name = "hideChatBoxToolStripMenuItem";
             this.hideChatBoxToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H";
-            this.hideChatBoxToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.hideChatBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.hideChatBoxToolStripMenuItem.Text = "Hide Chat Box";
             this.hideChatBoxToolStripMenuItem.Click += new System.EventHandler(this.HideChatBoxToolStripMenuItem_Click);
             // 
@@ -235,20 +235,20 @@ namespace TwitchVodPlayer.Forms {
             // 
             this.hideChatBoxWindowToolStripMenuItem.Name = "hideChatBoxWindowToolStripMenuItem";
             this.hideChatBoxWindowToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+W";
-            this.hideChatBoxWindowToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.hideChatBoxWindowToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.hideChatBoxWindowToolStripMenuItem.Text = "Hide Chat Box Window";
             this.hideChatBoxWindowToolStripMenuItem.Click += new System.EventHandler(this.HideChatBoxWindowToolStripMenuItem_Click);
             // 
             // chatToolStripSeparator3
             // 
             this.chatToolStripSeparator3.Name = "chatToolStripSeparator3";
-            this.chatToolStripSeparator3.Size = new System.Drawing.Size(262, 6);
+            this.chatToolStripSeparator3.Size = new System.Drawing.Size(261, 6);
             // 
             // stickyChatBoxToolStripMenuItem
             // 
             this.stickyChatBoxToolStripMenuItem.Name = "stickyChatBoxToolStripMenuItem";
             this.stickyChatBoxToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
-            this.stickyChatBoxToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.stickyChatBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.stickyChatBoxToolStripMenuItem.Text = "Enable Sticky Chat Box";
             this.stickyChatBoxToolStripMenuItem.Click += new System.EventHandler(this.StickChatBoxToolStripMenuItem_Click);
             // 
@@ -258,7 +258,7 @@ namespace TwitchVodPlayer.Forms {
             this.transparentChatBoxToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.transparentChatBoxToolStripMenuItem.Name = "transparentChatBoxToolStripMenuItem";
             this.transparentChatBoxToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+T";
-            this.transparentChatBoxToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.transparentChatBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.transparentChatBoxToolStripMenuItem.Text = "Enable Transparent Chat Box";
             this.transparentChatBoxToolStripMenuItem.Click += new System.EventHandler(this.TransparentChatBoxToolStripMenuItem_Click);
             // 
