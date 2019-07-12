@@ -22,6 +22,7 @@ This application allows you to do just that! With this, you can permanently stor
  - Transparent Chat Box background can be enabled/disabled.
  - Can adjust the offset of the chat with the video.
  - Functions similarly to your usual video player application.
+ - You can use keyboard shortcuts to forward/rewind the video, toggle fullscreen, toggle playback, and adjust chat offset.
  - Can resume to the last position of previously played videos.
  - You can drag video files onto the player to open and play them.
  - Can download the chat log of a VOD. (This uses [RechatTool by jdpurcell!](https://github.com/jdpurcell/RechatTool))
