@@ -207,6 +207,9 @@ namespace TwitchVodPlayer.Forms {
 
             geckoJs = new Gecko.AutoJSContext(chatBoxWebControl.Window);
 
+            Gecko.GeckoPreferences.User["dom.max_script_run_time"] = 0;
+            Gecko.GeckoPreferences.Default["dom.max_script_run_time"] = 0;
+
             chatBoxWebControl.Document.Body.Style.CssText = "overflow:hidden";
 
             if (isWindowShown) {
