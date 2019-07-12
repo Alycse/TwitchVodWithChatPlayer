@@ -729,6 +729,8 @@ namespace TwitchVodPlayer.Forms {
             videoFullscreenButton.Visible = true;
             videoVolumeBar.Visible = true;
 
+            Cursor.Show();
+
             hideVideoPlayerPanelTokenSource.Cancel();
             hideVideoPlayerPanelTokenSource = new CancellationTokenSource();
 
@@ -743,6 +745,9 @@ namespace TwitchVodPlayer.Forms {
                     timeLabel.Visible = false;
                     videoFullscreenButton.Visible = false;
                     videoVolumeBar.Visible = false;
+                    if (IsFullscreen) {
+                        Cursor.Hide();
+                    }
                 }));
             } catch (Exception e) {
                 Console.WriteLine("Error hiding video player panel. Reason: " + e.Message);
