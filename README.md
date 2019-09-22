@@ -33,7 +33,3 @@ Thanks to jdpurcell's [RechatTool](https://github.com/jdpurcell/RechatTool), you
 
 ## Issues
 If you encounter any issues with the application, [please let me know](https://github.com/Alycse/TwitchVodWithChatPlayer/issues) and I'll get back to you as soon as I can!
-
----
-
-This is my very first full and complete program that I've publicly released *ever* outside of video games (in which I used engines for), and this is also my first time using GitHub so I'm still kind of getting used to it. I mainly developed this program for educational purposes and for my own use *because I'm a vodfriend and I HATE having to deal with VODs that I'm watching being suddenly deleted*, **but** I'm still going to update it and keep it alive as much as I can, especially if there's a bug or if any of the APIs break.
