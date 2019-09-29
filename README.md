@@ -12,7 +12,7 @@ This application allows you to do just that! With this, you can permanently stor
  - .NET Framework 4.7.1 or higher
 
 ## Download
- [The installers for Twitch VOD Player can be downloaded here](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)
+ [**The installers for Twitch VOD Player can be downloaded here**](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)
  
  You may also download the sample VOD files ([**SampleVOD.zip**](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)) to test the player.
  
