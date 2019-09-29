@@ -13,6 +13,7 @@ This application allows you to do just that! With this, you can permanently stor
 
 ## Download
  [The installers for Twitch VOD Player can be downloaded here](https://github.com/Alycse/TwitchVodWithChatPlayer/releases)
+ 
  You may also download the sample VOD files (SampleVOD.zip) to test the player.
  
 ## Features
