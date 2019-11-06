@@ -46,9 +46,11 @@ namespace TwitchVodPlayer.Forms {
             this.chatToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.hideChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideChatBoxWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chatToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.stickyChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chatToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.recordChatExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -183,9 +185,11 @@ namespace TwitchVodPlayer.Forms {
             this.chatToolStripSeparator2,
             this.hideChatBoxToolStripMenuItem,
             this.hideChatBoxWindowToolStripMenuItem,
-            this.chatToolStripSeparator3,
+            this.toolStripSeparator1,
             this.stickyChatBoxToolStripMenuItem,
-            this.transparentChatBoxToolStripMenuItem});
+            this.transparentChatBoxToolStripMenuItem,
+            this.chatToolStripSeparator3,
+            this.recordChatExperimentalToolStripMenuItem});
             this.chatToolStripMenuItem.Name = "chatToolStripMenuItem";
             this.chatToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.chatToolStripMenuItem.Text = "Chat";
@@ -239,10 +243,10 @@ namespace TwitchVodPlayer.Forms {
             this.hideChatBoxWindowToolStripMenuItem.Text = "Hide Chat Box Window";
             this.hideChatBoxWindowToolStripMenuItem.Click += new System.EventHandler(this.HideChatBoxWindowToolStripMenuItem_Click);
             // 
-            // chatToolStripSeparator3
+            // toolStripSeparator1
             // 
-            this.chatToolStripSeparator3.Name = "chatToolStripSeparator3";
-            this.chatToolStripSeparator3.Size = new System.Drawing.Size(261, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(261, 6);
             // 
             // stickyChatBoxToolStripMenuItem
             // 
@@ -261,6 +265,18 @@ namespace TwitchVodPlayer.Forms {
             this.transparentChatBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.transparentChatBoxToolStripMenuItem.Text = "Enable Transparent Chat Box";
             this.transparentChatBoxToolStripMenuItem.Click += new System.EventHandler(this.TransparentChatBoxToolStripMenuItem_Click);
+            // 
+            // chatToolStripSeparator3
+            // 
+            this.chatToolStripSeparator3.Name = "chatToolStripSeparator3";
+            this.chatToolStripSeparator3.Size = new System.Drawing.Size(261, 6);
+            // 
+            // recordChatExperimentalToolStripMenuItem
+            // 
+            this.recordChatExperimentalToolStripMenuItem.Name = "recordChatExperimentalToolStripMenuItem";
+            this.recordChatExperimentalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.recordChatExperimentalToolStripMenuItem.Text = "Record Chat (Experimental)";
+            this.recordChatExperimentalToolStripMenuItem.Click += new System.EventHandler(this.recordChatExperimentalToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -542,5 +558,7 @@ namespace TwitchVodPlayer.Forms {
         private AxWMPLib.AxWindowsMediaPlayer videoPlayer;
         private Controls.TransparentPanel transparentPanelCover;
         private Controls.TransparentPanel transparentPanel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem recordChatExperimentalToolStripMenuItem;
     }
 }

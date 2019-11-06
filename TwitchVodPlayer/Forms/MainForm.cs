@@ -289,6 +289,7 @@ namespace TwitchVodPlayer.Forms {
                 //
 
                 IsMuted = false;
+                Console.WriteLine("Unmute me!");
 
                 UpdateVolumeIconBox();
 
@@ -307,6 +308,7 @@ namespace TwitchVodPlayer.Forms {
 
                 if (videoPlayer.settings.mute != isMuted) {
                     videoPlayer.settings.mute = isMuted;
+                    Console.WriteLine("Mute state: " + isMuted);
                 }
 
                 //
@@ -470,6 +472,9 @@ namespace TwitchVodPlayer.Forms {
             IsHiddenChatBoxWindowEnabled = Properties.Settings.Default.HiddenChatBoxWindow;
             IsTransparentChatBoxEnabled = Properties.Settings.Default.TransparentChatBox;
             VideoPlayerVolume = Properties.Settings.Default.Volume;
+            if (Properties.Settings.Default.Volume == -1) {
+                Properties.Settings.Default.Volume = 100;
+            }
             IsMuted = Properties.Settings.Default.VolumeMuted;
 
             try {
@@ -479,10 +484,6 @@ namespace TwitchVodPlayer.Forms {
             }
             if (savedPositions == null) {
                 savedPositions = new OrderedDictionary();
-            }
-
-            if (Properties.Settings.Default.Volume == -1) {
-                Properties.Settings.Default.Volume = 100;
             }
 
             if (Properties.Settings.Default.MainFormSize.Width != -1) {
@@ -783,6 +784,8 @@ namespace TwitchVodPlayer.Forms {
 
         private void LoadVideo(Video.VideoFile video, bool startAtBeginning = false) {
             if (!isLoadingVideo) {
+                bool isMuted = IsMuted;
+
                 isLoadingVideo = true;
 
                 MainForm.Instance.Invoke(new Action(() => {
@@ -839,6 +842,8 @@ namespace TwitchVodPlayer.Forms {
                 MainForm.Instance.Invoke(new Action(() => {
                     openVodToolStripMenuItem.Enabled = true;
                 }));
+
+                IsMuted = isMuted;
 
                 isLoadingVideo = false;
             }
@@ -990,6 +995,10 @@ namespace TwitchVodPlayer.Forms {
 
         private void transparentPanelCover_MouseDoubleClick(object sender, MouseEventArgs e) {
             ToggleFullscreen();
+        }
+
+        private void recordChatExperimentalToolStripMenuItem_Click (object sender, EventArgs e) {
+            ChatForm.Instance.RecordChat();
         }
     }
 }

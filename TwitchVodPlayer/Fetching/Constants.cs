@@ -35,6 +35,7 @@
         public static readonly string ChannelJsonFileName = "Channel";
 
         public static readonly string EmoticonFileExtension = ".png";
+        public static readonly string GifEmoticonFileExtension = ".gif";
         public static readonly string BadgeFileExtension = ".png";
     }
 }

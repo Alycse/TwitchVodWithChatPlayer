@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,7 +17,7 @@ namespace TwitchVodPlayer.Chat {
         //Fields
 
         private readonly int parsingWordMaxLength = 20;
-        private readonly int parsingWordMinLength = 3;
+        private readonly int parsingWordMinLength = 2;
 
         //Initialization
 
@@ -39,10 +41,20 @@ namespace TwitchVodPlayer.Chat {
                 }
 
                 StringBuilder stringBuilder = new StringBuilder(convertedMessageBody);
-                stringBuilder.Remove((int)emoticon.begin + indexOffset, (int)emoticon.end - (int)emoticon.begin + 1);
+                try {
+                    stringBuilder.Remove((int)emoticon.begin + indexOffset, (int)emoticon.end - (int)emoticon.begin + 1);
+                } catch (Exception e) {
+                    Console.WriteLine("Failed parsing Twitch emoticon: " + e.Message);
+                    return messageBody;
+                }
 
                 string htmlImageTag = Chat.Constants.HtmlImageTagBegin + emoticonPath + Chat.Constants.HtmlImageTagEnd;
-                stringBuilder.Insert((int)emoticon.begin + indexOffset, htmlImageTag);
+                try {
+                    stringBuilder.Insert((int)emoticon.begin + indexOffset, htmlImageTag);
+                }catch (Exception e) {
+                    Console.WriteLine("Failed parsing Twitch emoticon: " + e.Message);
+                    return messageBody;
+                }
 
                 indexOffset += (htmlImageTag.Length) - ((int)emoticon.end - (int)emoticon.begin + 1);
                 convertedMessageBody = stringBuilder.ToString();
@@ -68,18 +80,17 @@ namespace TwitchVodPlayer.Chat {
                 }
                 foreach (KeyValuePair<string, string> emoticonPair in emoticonDictionary) {
                     string emoticonPath;
-                    string emoticonFileName = HttpUtility.UrlEncode(emoticonPair.Key);
+                    string emoticonFileName = Regex.Replace(HttpUtility.UrlEncode(emoticonPair.Key), "[^.A-Za-z0-9]", "");
                     if (channelId == "") {
-                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + emoticonFileName + Fetching.Constants.EmoticonFileExtension;
+                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + emoticonFileName;
                     } else {
-                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + channelId + @"/" + emoticonFileName + Fetching.Constants.EmoticonFileExtension;
+                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + channelId + @"/" + emoticonFileName;
                     }
 
                     if (!File.Exists(emoticonPath)) {
                         emoticonDownloader.DownloadEmoticon(emoticonPair.Value, emoticonPath);
                     }
-
-                    if (messageBodyWord == emoticonPair.Key) {
+                    if (messageBodyWord == emoticonPair.Key.Split('.')[0]) {
                         convertedMessageBodyWord = 
                             (Chat.Constants.HtmlImageTagBegin + emoticonPath + Chat.Constants.HtmlImageTagEnd) + " ";
                         break;
@@ -197,7 +208,7 @@ namespace TwitchVodPlayer.Chat {
                                 string emoticonUrl = "https:" + separatedFirstURL[1].Substring(firstIndex + 1, lastIndex - firstIndex - 1);
 
                                 try {
-                                    ffzEmoticonDictionary.Add(emoticon.name.ToString(), emoticonUrl);
+                                    ffzEmoticonDictionary.Add(emoticon.name.ToString() + Fetching.Constants.EmoticonFileExtension, emoticonUrl);
                                 } catch { }
                             }
                         }
@@ -249,9 +260,8 @@ namespace TwitchVodPlayer.Chat {
                                 var emoticon = serializer.Deserialize<dynamic>(reader);
 
                                 string emoticonUrl = @"https://cdn.betterttv.net/emote/" + emoticon.id + @"/" + Fetching.Constants.BttvEmoticonSize;
-
                                 try {
-                                    bttvEmoticonDictionary.Add(emoticon.code.ToString(), emoticonUrl);
+                                    bttvEmoticonDictionary.Add(emoticon.code.ToString() + "." + emoticon.imageType.ToString(), emoticonUrl);
                                 } catch { }
                             }
                         }

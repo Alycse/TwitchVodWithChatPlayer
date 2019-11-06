@@ -83,11 +83,16 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
 
                     bool lastCommentWithinTimeFrame = lastCommentTimespan > beginTime && lastCommentTimespan < endTime;
 
+                    int progressPerc = 0;
+                    if (lastCommentTimespan.HasValue && endTime.HasValue) {
+                        progressPerc = (int)((lastCommentTimespan.Value.TotalSeconds / endTime.Value.TotalSeconds) * 100);
+                    }
+
                     if (lastCommentTimespan != null) {
                         BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
-                        "\nSegments downloaded: " + segmentCount +
-                        "\nCurrent time: " + (lastCommentTimespan),
-                        (segmentCount % 10) * 10, 0);
+                        "\nCurrent time: " + (lastCommentTimespan) +
+                        "\nProgress: " + progressPerc + "%",
+                        progressPerc, 0);
                     }
 
                     if (beginTime != null && endTime != null && lastCommentTimespan > endTime) {

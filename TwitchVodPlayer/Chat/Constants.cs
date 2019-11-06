@@ -13,5 +13,10 @@ namespace TwitchVodPlayer.Chat {
 
         public static readonly string HtmlImageTagBegin = "<img src='file:///";
         public static readonly string HtmlImageTagEnd = "' onerror='imgError(this);'>";
+
+        /*
+        public static readonly string HtmlImageTagBegin = "<x-gif src='file:///";
+        public static readonly string HtmlImageTagEnd = "' speed='5' onerror='imgError(this);'></x-gif>";
+        */
     }
 }

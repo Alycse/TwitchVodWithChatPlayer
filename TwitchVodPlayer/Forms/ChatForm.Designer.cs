@@ -26,7 +26,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatForm));
             this.chatBoxWebControl = new Gecko.GeckoWebBrowser();
             this.draggerBox = new System.Windows.Forms.PictureBox();
-            this.transparentPanel1 = new TwitchVodPlayer.Controls.TransparentPanel();
+            this.transparentPanel = new TwitchVodPlayer.Controls.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.draggerBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,15 +54,15 @@
             this.draggerBox.TabStop = false;
             this.draggerBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.draggerBox_MouseDown);
             // 
-            // transparentPanel1
+            // transparentPanel
             // 
-            this.transparentPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.transparentPanel1.Location = new System.Drawing.Point(0, 0);
-            this.transparentPanel1.Name = "transparentPanel1";
-            this.transparentPanel1.Opacity = 100;
-            this.transparentPanel1.Size = new System.Drawing.Size(434, 470);
-            this.transparentPanel1.TabIndex = 3;
+            this.transparentPanel.BackColor = System.Drawing.Color.Transparent;
+            this.transparentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.transparentPanel.Location = new System.Drawing.Point(0, 0);
+            this.transparentPanel.Name = "transparentPanel";
+            this.transparentPanel.Opacity = 100;
+            this.transparentPanel.Size = new System.Drawing.Size(434, 470);
+            this.transparentPanel.TabIndex = 3;
             // 
             // ChatForm
             // 
@@ -72,7 +72,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(434, 470);
             this.Controls.Add(this.draggerBox);
-            this.Controls.Add(this.transparentPanel1);
+            this.Controls.Add(this.transparentPanel);
             this.Controls.Add(this.chatBoxWebControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -91,6 +91,6 @@
         #endregion
         private System.Windows.Forms.PictureBox draggerBox;
         private Gecko.GeckoWebBrowser chatBoxWebControl;
-        private Controls.TransparentPanel transparentPanel1;
+        private Controls.TransparentPanel transparentPanel;
     }
 }
