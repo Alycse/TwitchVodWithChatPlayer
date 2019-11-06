@@ -26,7 +26,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatForm));
             this.chatBoxWebControl = new Gecko.GeckoWebBrowser();
             this.draggerBox = new System.Windows.Forms.PictureBox();
-            this.transparentPanel = new TwitchVodPlayer.Controls.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.draggerBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,25 +53,14 @@
             this.draggerBox.TabStop = false;
             this.draggerBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.draggerBox_MouseDown);
             // 
-            // transparentPanel
-            // 
-            this.transparentPanel.BackColor = System.Drawing.Color.Transparent;
-            this.transparentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.transparentPanel.Location = new System.Drawing.Point(0, 0);
-            this.transparentPanel.Name = "transparentPanel";
-            this.transparentPanel.Opacity = 100;
-            this.transparentPanel.Size = new System.Drawing.Size(434, 470);
-            this.transparentPanel.TabIndex = 3;
-            // 
             // ChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(434, 470);
             this.Controls.Add(this.draggerBox);
-            this.Controls.Add(this.transparentPanel);
             this.Controls.Add(this.chatBoxWebControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

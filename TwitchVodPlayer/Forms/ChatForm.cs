@@ -110,7 +110,7 @@ namespace TwitchVodPlayer.Forms {
 
         private readonly FormBorderStyle defaultBorderStyle;
 
-        private readonly Color transparencyKeyColor = Color.FromArgb(0, 0, 0);
+        private readonly Color transparencyKeyColor = Color.FromArgb(25, 25, 25);
         private readonly Color nonTransparentColor = Color.FromArgb(35, 35, 35);
 
         private double currentChatOffset;
