@@ -154,7 +154,7 @@ namespace TwitchVodPlayer.Forms {
 
         private readonly int displayOffsetLengthSeconds = 2;
 
-        private readonly int displayVideoPlayerPanelLengthSeconds = 3;
+        private readonly int displayVideoPlayerPanelLengthSeconds = 5;
 
         OrderedDictionary savedPositions = new OrderedDictionary();
 
@@ -289,7 +289,6 @@ namespace TwitchVodPlayer.Forms {
                 //
 
                 IsMuted = false;
-                Console.WriteLine("Unmute me!");
 
                 UpdateVolumeIconBox();
 
@@ -308,7 +307,6 @@ namespace TwitchVodPlayer.Forms {
 
                 if (videoPlayer.settings.mute != isMuted) {
                     videoPlayer.settings.mute = isMuted;
-                    Console.WriteLine("Mute state: " + isMuted);
                 }
 
                 //
