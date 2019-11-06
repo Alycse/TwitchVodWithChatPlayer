@@ -78,26 +78,34 @@ namespace TwitchVodPlayer.Chat {
                     convertedMessageBody += convertedMessageBodyWord;
                     continue;
                 }
-                foreach (KeyValuePair<string, string> emoticonPair in emoticonDictionary) {
-                    string emoticonPath;
-                    string emoticonFileName = Regex.Replace(HttpUtility.UrlEncode(emoticonPair.Key), "[^.A-Za-z0-9]", "");
-                    if (channelId == "") {
-                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + emoticonFileName;
-                    } else {
-                        emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + channelId + @"/" + emoticonFileName;
-                    }
+                string emoticonKey = null;
+                string emoticonValue = null;
 
-                    if (!File.Exists(emoticonPath)) {
-                        emoticonDownloader.DownloadEmoticon(emoticonPair.Value, emoticonPath);
-                    }
-                    if (messageBodyWord == emoticonPair.Key.Split('.')[0]) {
-                        convertedMessageBodyWord = 
-                            (Chat.Constants.HtmlImageTagBegin + emoticonPath + Chat.Constants.HtmlImageTagEnd) + " ";
-                        break;
-                    } else {
-                        continue;
-                    }
+                if (emoticonDictionary.ContainsKey(messageBodyWord + Fetching.Constants.EmoticonFileExtension)) {
+                    emoticonKey = messageBodyWord + Fetching.Constants.EmoticonFileExtension;
+                    emoticonValue = emoticonDictionary[messageBodyWord + Fetching.Constants.EmoticonFileExtension];
+                } else if (emoticonDictionary.ContainsKey(messageBodyWord + Fetching.Constants.GifEmoticonFileExtension)) {
+                    emoticonKey = messageBodyWord + Fetching.Constants.GifEmoticonFileExtension;
+                    emoticonValue = emoticonDictionary[messageBodyWord + Fetching.Constants.GifEmoticonFileExtension];
+                } else {
+                    convertedMessageBody += convertedMessageBodyWord;
+                    continue;
                 }
+
+                string emoticonPath;
+                string emoticonFileName = Regex.Replace(HttpUtility.UrlEncode(emoticonKey), "[^.A-Za-z0-9]", "");
+                if (channelId == "") {
+                    emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + emoticonFileName;
+                } else {
+                    emoticonPath = Fetching.Constants.EmoticonsPath + directoryName + @"/" + channelId + @"/" + emoticonFileName;
+                }
+
+                if (!File.Exists(emoticonPath)) {
+                    emoticonDownloader.DownloadEmoticon(emoticonValue, emoticonPath);
+                }
+
+                convertedMessageBodyWord = (Chat.Constants.HtmlImageTagBegin + emoticonPath + Chat.Constants.HtmlImageTagEnd) + " ";
+
                 convertedMessageBody += convertedMessageBodyWord;
             }
 
