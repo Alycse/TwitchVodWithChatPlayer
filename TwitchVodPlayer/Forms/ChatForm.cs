@@ -573,6 +573,8 @@ namespace TwitchVodPlayer.Forms {
             uint fps = maxFps;
             float speedMultiplier = 1.4f;
 
+            bool firstMessageShown = false;
+
             int messageTimeChunk = 500;
 
             string recordedChatVideoFile = CurrentChat.FilePath + "-" + chatPart + ".mp4";
@@ -588,7 +590,7 @@ namespace TwitchVodPlayer.Forms {
             long totalTime = (long) chatLogLines[chatLogLines.Count - 1].Item1;
             long totalFrames = (totalTime * fps) / 1000;
 
-            int currentChatLogLinesIndex = 0;
+            int recordCurrentChatLogLinesIndex = 0;
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -604,11 +606,13 @@ namespace TwitchVodPlayer.Forms {
 
             for (int i = 0; i < totalFrames; i++) {
                 int messageTime = ((int)((((float)i / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
-                if (currentChatLogLinesIndex < chatLogLines.Count &&
-                    chatLogLines[currentChatLogLinesIndex].Item1 <= messageTime) {
+                if (recordCurrentChatLogLinesIndex < chatLogLines.Count &&
+                    chatLogLines[recordCurrentChatLogLinesIndex].Item1 <= messageTime) {
+
+                    Console.WriteLine(chatLogLines[recordCurrentChatLogLinesIndex].Item1 + " <= " + i + " / " + fps);
 
                     Func<string> parseChatLogLineFunction = new Func<string>(() =>
-                            ParseChatLogLine(chatLogLines[currentChatLogLinesIndex++].Item2, currentChannelId, parseChatLogLineTokenSource.Token));
+                            ParseChatLogLine(chatLogLines[recordCurrentChatLogLinesIndex++].Item2, currentChannelId, parseChatLogLineTokenSource.Token));
                     string chatLogLine = await Task.Run<string>(parseChatLogLineFunction);
 
                     if (chatLogLine.Contains(".gif")) {
@@ -619,6 +623,9 @@ namespace TwitchVodPlayer.Forms {
 
                     if (chatLogLine != null && chatLogLine != "") {
                         AddChatLine(chatLogLine);
+                        if (!firstMessageShown) {
+                            firstMessageShown = true;
+                        }
                     }
 
                     await Task.Delay(20);
@@ -655,7 +662,7 @@ namespace TwitchVodPlayer.Forms {
 
                 if (gifPresentSinceLines > 0) {
                     fps = maxFps;
-                } else {
+                } else if(firstMessageShown) {
                     fps = minFps;
                 }
             }
