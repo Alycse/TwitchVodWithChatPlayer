@@ -525,6 +525,8 @@ namespace TwitchVodPlayer.Forms {
         }
 
         public async void ClearChatBox () {
+            await Task.Delay(500);
+
             if (chatLogLines != null && chatLogLines.Count > 0) {
                 findCurrentChatLogLinesIndexTokenSource.Cancel();
                 findCurrentChatLogLinesIndexTokenSource = new CancellationTokenSource();
@@ -571,12 +573,12 @@ namespace TwitchVodPlayer.Forms {
             uint fps = maxFps;
             float speedMultiplier = 1.4f;
 
-            float chatTimeChunk = 2;
+            int messageTimeChunk = 500;
 
             string recordedChatVideoFile = CurrentChat.FilePath + "-" + chatPart + ".mp4";
 
             chatWriter = new VideoFileWriter();
-            chatWriter.Open(CurrentChat.FilePath + "-" + chatPart + ".mp4", chatBoxWebControl.Width, chatBoxWebControl.Height, fps, VideoCodec.MPEG4, 128000000);
+            chatWriter.Open(CurrentChat.FilePath + "-" + chatPart + ".mp4", chatBoxWebControl.Width, chatBoxWebControl.Height, fps, VideoCodec.MPEG4, 96000000);
 
             Console.WriteLine("Starting Chat Recorder...");
             Instance.Text = "Starting Chat Recorder... Please wait.";
@@ -601,8 +603,9 @@ namespace TwitchVodPlayer.Forms {
             await Task.Delay(500);
 
             for (int i = 0; i < totalFrames; i++) {
+                int messageTime = ((int)((((float)i / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
                 if (currentChatLogLinesIndex < chatLogLines.Count &&
-                    chatLogLines[currentChatLogLinesIndex].Item1 <= ((float)i / fps) * 1000 * chatTimeChunk) {
+                    chatLogLines[currentChatLogLinesIndex].Item1 <= messageTime) {
 
                     Func<string> parseChatLogLineFunction = new Func<string>(() =>
                             ParseChatLogLine(chatLogLines[currentChatLogLinesIndex++].Item2, currentChannelId, parseChatLogLineTokenSource.Token));
@@ -617,6 +620,10 @@ namespace TwitchVodPlayer.Forms {
                     if (chatLogLine != null && chatLogLine != "") {
                         AddChatLine(chatLogLine);
                     }
+
+                    await Task.Delay(20);
+                } else if (gifPresentSinceLines > 0) {
+                    await Task.Delay((int)(1000 / fps / speedMultiplier));
                 }
 
                 using (Graphics controlGraphics = chatBoxWebControl.CreateGraphics()) {
@@ -648,7 +655,6 @@ namespace TwitchVodPlayer.Forms {
 
                 if (gifPresentSinceLines > 0) {
                     fps = maxFps;
-                    await Task.Delay((int)(1000 / fps / speedMultiplier));
                 } else {
                     fps = minFps;
                 }
