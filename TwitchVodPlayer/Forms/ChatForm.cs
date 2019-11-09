@@ -571,6 +571,8 @@ namespace TwitchVodPlayer.Forms {
             uint fps = maxFps;
             float speedMultiplier = 1.4f;
 
+            float chatTimeChunk = 2;
+
             string recordedChatVideoFile = CurrentChat.FilePath + "-" + chatPart + ".mp4";
 
             chatWriter = new VideoFileWriter();
@@ -578,8 +580,6 @@ namespace TwitchVodPlayer.Forms {
 
             Console.WriteLine("Starting Chat Recorder...");
             Instance.Text = "Starting Chat Recorder... Please wait.";
-
-            uint prevFrame = 0;
 
             recordingChat = true;
 
@@ -602,7 +602,7 @@ namespace TwitchVodPlayer.Forms {
 
             for (int i = 0; i < totalFrames; i++) {
                 if (currentChatLogLinesIndex < chatLogLines.Count &&
-                    (chatLogLines[currentChatLogLinesIndex].Item1) <= ((float)i / fps) * 1000) {
+                    chatLogLines[currentChatLogLinesIndex].Item1 <= ((float)i / fps) * 1000 * chatTimeChunk) {
 
                     Func<string> parseChatLogLineFunction = new Func<string>(() =>
                             ParseChatLogLine(chatLogLines[currentChatLogLinesIndex++].Item2, currentChannelId, parseChatLogLineTokenSource.Token));
