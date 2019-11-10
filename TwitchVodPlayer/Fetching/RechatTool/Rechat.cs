@@ -74,6 +74,7 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
             TimeSpan? totalTime = endTime - beginTime;
             using (var writer = new JsonTextWriter(new StreamWriter(path, false, new UTF8Encoding(true)))) {
                 writer.WriteStartArray();
+                int progressPerc = 0;
                 do {
                     if (token.IsCancellationRequested) {
                         break;
@@ -83,17 +84,26 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
 
                     bool lastCommentWithinTimeFrame = lastCommentTimespan > beginTime && lastCommentTimespan < endTime;
 
-                    int progressPerc = 0;
-                    if (lastCommentTimespan.HasValue && endTime.HasValue) {
-                        progressPerc = (int)((lastCommentTimespan.Value.TotalSeconds / endTime.Value.TotalSeconds) * 100);
+                    if (lastCommentTimespan.HasValue) {
+                        if (endTime.HasValue) {
+                            progressPerc = Math.Min((int)((lastCommentTimespan.Value.TotalSeconds / endTime.Value.TotalSeconds) * 100), 100);
+                            if (lastCommentTimespan != null) {
+                                BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
+                                "\nCurrent time: " + (lastCommentTimespan) +
+                                "\nProgress: " + progressPerc + "%",
+                                progressPerc, 0);
+                            }
+                        } else {
+                            progressPerc = ((int)lastCommentTimespan.Value.TotalSeconds % 25) * 4;
+                            if (lastCommentTimespan != null) {
+                                BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
+                                "\nCurrent time: " + (lastCommentTimespan),
+                                progressPerc, 0);
+                            }
+                        }
                     }
 
-                    if (lastCommentTimespan != null) {
-                        BroadcastNewProgressDownloadingChatLogEvent("Downloading Chat Log..." +
-                        "\nCurrent time: " + (lastCommentTimespan) +
-                        "\nProgress: " + progressPerc + "%",
-                        progressPerc, 0);
-                    }
+                    
 
                     if (beginTime != null && endTime != null && lastCommentTimespan > endTime) {
                         break;
