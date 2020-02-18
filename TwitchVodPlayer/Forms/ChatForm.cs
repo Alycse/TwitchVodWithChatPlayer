@@ -562,7 +562,7 @@ namespace TwitchVodPlayer.Forms {
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool PrintWindow (IntPtr hwnd, IntPtr hDC, uint nFlags);
         VideoFileWriter chatWriter;
-        public async void RecordChat () {
+        public async void RecordChat (float beginFramePerc, float endFramePerc) {
             if (CurrentChat == null) {
                 return;
             }
@@ -580,7 +580,7 @@ namespace TwitchVodPlayer.Forms {
             string recordedChatVideoFile = CurrentChat.FilePath + "-" + chatPart + ".mp4";
 
             chatWriter = new VideoFileWriter();
-            chatWriter.Open(CurrentChat.FilePath + "-" + chatPart + ".mp4", chatBoxWebControl.Width, chatBoxWebControl.Height, fps, VideoCodec.MPEG4, 96000000);
+            chatWriter.Open(CurrentChat.FilePath + "-" + chatPart + "-" + beginFramePerc + "-" + endFramePerc + ".mp4", chatBoxWebControl.Width, chatBoxWebControl.Height, fps, VideoCodec.MPEG4, 100000000);
 
             Console.WriteLine("Starting Chat Recorder...");
             Instance.Text = "Starting Chat Recorder... Please wait.";
@@ -590,11 +590,22 @@ namespace TwitchVodPlayer.Forms {
             long totalTime = (long) chatLogLines[chatLogLines.Count - 1].Item1;
             long totalFrames = (totalTime * fps) / 1000;
 
+            int beginFrame = (int)(totalFrames * beginFramePerc);
+            int endFrame = (int)(totalFrames * endFramePerc);
+
             int recordCurrentChatLogLinesIndex = 0;
+            int targetTime = ((int)((((float)beginFrame / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
+            for (int i = 0; i < chatLogLines.Count; i++) {
+                Console.WriteLine(chatLogLines[i].Item1 + " >= " + targetTime);
+                if (chatLogLines[i].Item1 >= targetTime) {
+                    recordCurrentChatLogLinesIndex = Math.Max(0, i - 10);
+                    break;
+                }
+            }
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            int prevChatLogLineIndex = 0;
+            int prevChatLogLineIndex = recordCurrentChatLogLinesIndex;
             TimeSpan estTimeRemaining = TimeSpan.Zero;
 
             int maxGifLines = 8;
@@ -604,7 +615,7 @@ namespace TwitchVodPlayer.Forms {
             ExecuteJavascriptCommand("clearChatBox()");
             await Task.Delay(500);
 
-            for (int i = 0; i < totalFrames; i++) {
+            for (int i = beginFrame; i < endFrame; i++) {
                 int messageTime = ((int)((((float)i / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
                 if (recordCurrentChatLogLinesIndex < chatLogLines.Count &&
                     chatLogLines[recordCurrentChatLogLinesIndex].Item1 <= messageTime) {
@@ -651,10 +662,10 @@ namespace TwitchVodPlayer.Forms {
                     stopwatch.Restart();
                 }
 
-                string percentage = (((float)i / totalFrames) * 100.0f).ToString("0.0000");
+                string percentage = (((float)i / endFrame) * 100.0f).ToString("0.0000");
 
                 Instance.Text = 
-                    "Recording Chat... - " + (i + " Frames / " + totalFrames + " Frames (" + percentage + "%)");
+                    "Recording Chat... - " + (i + " Frames / " + endFrame + " Frames (" + percentage + "%)");
 
                 if (estTimeRemaining != TimeSpan.Zero) {
                     Instance.Text += " - EST: " + (int)estTimeRemaining.TotalHours + " H " + (int)estTimeRemaining.Minutes + " M ";

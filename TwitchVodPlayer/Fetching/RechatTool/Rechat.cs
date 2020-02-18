@@ -103,8 +103,6 @@ namespace TwitchVodPlayer.Fetching.RechatTool {
                         }
                     }
 
-                    
-
                     if (beginTime != null && endTime != null && lastCommentTimespan > endTime) {
                         break;
                     }

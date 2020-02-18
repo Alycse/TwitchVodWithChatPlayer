@@ -51,6 +51,9 @@ namespace TwitchVodPlayer.Forms {
             this.transparentChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chatToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.recordChatExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordChat2ExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordChat3ExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordChat4ExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -189,7 +192,10 @@ namespace TwitchVodPlayer.Forms {
             this.stickyChatBoxToolStripMenuItem,
             this.transparentChatBoxToolStripMenuItem,
             this.chatToolStripSeparator3,
-            this.recordChatExperimentalToolStripMenuItem});
+            this.recordChatExperimentalToolStripMenuItem,
+            this.recordChat2ExperimentalToolStripMenuItem,
+            this.recordChat3ExperimentalToolStripMenuItem,
+            this.recordChat4ExperimentalToolStripMenuItem});
             this.chatToolStripMenuItem.Name = "chatToolStripMenuItem";
             this.chatToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.chatToolStripMenuItem.Text = "Chat";
@@ -277,6 +283,27 @@ namespace TwitchVodPlayer.Forms {
             this.recordChatExperimentalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.recordChatExperimentalToolStripMenuItem.Text = "Record Chat (Experimental)";
             this.recordChatExperimentalToolStripMenuItem.Click += new System.EventHandler(this.recordChatExperimentalToolStripMenuItem_Click);
+            // 
+            // recordChat2ExperimentalToolStripMenuItem
+            // 
+            this.recordChat2ExperimentalToolStripMenuItem.Name = "recordChat2ExperimentalToolStripMenuItem";
+            this.recordChat2ExperimentalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.recordChat2ExperimentalToolStripMenuItem.Text = "Record Chat 2 (Experimental)";
+            this.recordChat2ExperimentalToolStripMenuItem.Click += new System.EventHandler(this.recordChat2ExperimentalToolStripMenuItem_Click);
+            // 
+            // recordChat3ExperimentalToolStripMenuItem
+            // 
+            this.recordChat3ExperimentalToolStripMenuItem.Name = "recordChat3ExperimentalToolStripMenuItem";
+            this.recordChat3ExperimentalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.recordChat3ExperimentalToolStripMenuItem.Text = "Record Chat 3 (Experimental)";
+            this.recordChat3ExperimentalToolStripMenuItem.Click += new System.EventHandler(this.recordChat3ExperimentalToolStripMenuItem_Click);
+            // 
+            // recordChat4ExperimentalToolStripMenuItem
+            // 
+            this.recordChat4ExperimentalToolStripMenuItem.Name = "recordChat4ExperimentalToolStripMenuItem";
+            this.recordChat4ExperimentalToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.recordChat4ExperimentalToolStripMenuItem.Text = "Record Chat 4 (Experimental)";
+            this.recordChat4ExperimentalToolStripMenuItem.Click += new System.EventHandler(this.recordChat4ExperimentalToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -560,5 +587,8 @@ namespace TwitchVodPlayer.Forms {
         private Controls.TransparentPanel transparentPanel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem recordChatExperimentalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recordChat2ExperimentalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recordChat3ExperimentalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recordChat4ExperimentalToolStripMenuItem;
     }
 }

@@ -996,7 +996,19 @@ namespace TwitchVodPlayer.Forms {
         }
 
         private void recordChatExperimentalToolStripMenuItem_Click (object sender, EventArgs e) {
-            ChatForm.Instance.RecordChat();
+            ChatForm.Instance.RecordChat(0.0f, 0.25f);
+        }
+
+        private void recordChat2ExperimentalToolStripMenuItem_Click (object sender, EventArgs e) {
+            ChatForm.Instance.RecordChat(0.25f, 0.5f);
+        }
+
+        private void recordChat3ExperimentalToolStripMenuItem_Click (object sender, EventArgs e) {
+            ChatForm.Instance.RecordChat(0.5f, 0.75f);
+        }
+
+        private void recordChat4ExperimentalToolStripMenuItem_Click (object sender, EventArgs e) {
+            ChatForm.Instance.RecordChat(0.75f, 1.0f);
         }
     }
 }
