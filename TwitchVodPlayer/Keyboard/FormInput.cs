@@ -13,34 +13,63 @@ namespace TwitchVodPlayer.Keyboard {
 
         //Methods
 
-        public static void Form_KeyDown(object sender, KeyEventArgs e) {
+        //Shortcut Keys
+        public static void Form_KeyDown (object sender, KeyEventArgs e) {
             if (formCanInputKey) {
-
+                Console.WriteLine("Fullscreen 0!");
                 if (e.Alt && e.KeyCode == Keys.Return) {
                     MainForm.Instance.IsFullscreen = !MainForm.Instance.IsFullscreen;
-                } else if (e.KeyCode == Keys.Escape) {
-                    MainForm.Instance.IsFullscreen = false;
-                } else if (e.KeyCode == Keys.J) {
-                    MainForm.Instance.ForwardVideoPlayerTime(Video.Constants.BackwardMilliseconds);
-                } else if (e.KeyCode == Keys.L) {
-                    MainForm.Instance.ForwardVideoPlayerTime(Video.Constants.ForwardMilliseconds);
-                } else if (e.KeyCode == Keys.K || e.KeyCode == Keys.Space) {
-                    MainForm.Instance.ToggleVideoPlayerPlayback();
-                } else if (e.KeyCode == Keys.P) {
-                    MainForm.Instance.ChangeChatOffset(MainForm.Instance.OffsetIncreaseValueMilliseconds);
-                } else if (e.KeyCode == Keys.O) {
-                    MainForm.Instance.ChangeChatOffset(-MainForm.Instance.OffsetIncreaseValueMilliseconds);
-                } else if (e.Control && e.KeyCode == Keys.H) {
-                    MainForm.Instance.ToggleHiddenChatBox();
-                } else if (e.Control && e.KeyCode == Keys.W) {
-                    MainForm.Instance.ToggleHiddenChatBoxWindow();
-                } else if (e.Control && e.KeyCode == Keys.S) {
-                    MainForm.Instance.ToggleStickyChatBox();
-                } else if (e.Control && e.KeyCode == Keys.T) {
-                    MainForm.Instance.ToggleTransparentChatBox();
-                } else if (e.Control && e.KeyCode == Keys.N) {
-                    MainForm.Instance.OpenVodFile();
+                } else if (e.Control) {
+                    switch (e.KeyCode) {
+                        case Keys.H:
+                            MainForm.Instance.ToggleHiddenChatBox();
+                            break;
+                        case Keys.W:
+                            MainForm.Instance.ToggleHiddenChatBoxWindow();
+                            break;
+                        case Keys.S:
+                            MainForm.Instance.ToggleStickyChatBox();
+                            break;
+                        case Keys.T:
+                            MainForm.Instance.ToggleTransparentChatBox();
+                            break;
+                        case Keys.N:
+                            MainForm.Instance.OpenVodFile();
+                            break;
+                        case Keys.D:
+                            MainForm.Instance.ToggleHiddenDraggerBox();
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    switch (e.KeyCode) {
+                        case Keys.Escape:
+                            MainForm.Instance.IsFullscreen = false;
+                            break;
+                        case Keys.J:
+                            MainForm.Instance.ForwardVideoPlayerTime(Video.Constants.BackwardMilliseconds);
+                            break;
+                        case Keys.L:
+                            MainForm.Instance.ForwardVideoPlayerTime(Video.Constants.ForwardMilliseconds);
+                            break;
+                        case Keys.P:
+                            MainForm.Instance.ChangeChatOffset(MainForm.Instance.OffsetIncreaseValueMilliseconds);
+                            break;
+                        case Keys.O:
+                            MainForm.Instance.ChangeChatOffset(-MainForm.Instance.OffsetIncreaseValueMilliseconds);
+                            break;
+                        case Keys.Space:
+                            MainForm.Instance.ToggleVideoPlayerPlayback();
+                            break;
+                        case Keys.K:
+                            MainForm.Instance.ToggleVideoPlayerPlayback();
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
                 formCanInputKey = false;
 
                 Task.Delay(new TimeSpan(0, 0, 0, 0, formInputKeyCooldownMillisecond)).ContinueWith(o => { formCanInputKey = true; });

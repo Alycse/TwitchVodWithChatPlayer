@@ -58,6 +58,10 @@ namespace TwitchVodPlayer.Forms {
         protected virtual void OnEnablingTransparentChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
             EnablingTransparentChatBox?.Invoke(this, e);
         }
+        public event Forms.EventHandlers.EnablingSettingEventHandler EnablingHideDraggerBox;
+        protected virtual void OnEnablingHideDraggerBox (object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
+            EnablingHideDraggerBox?.Invoke(this, e);
+        }
 
         public event Forms.EventHandlers.LoadingVideoEventHandler LoadingVideo;
         private void OnLoadingVideo(object sender, Forms.EventHandlers.LoadingVideoEventArgs e) {
@@ -115,6 +119,12 @@ namespace TwitchVodPlayer.Forms {
             Forms.EventHandlers.EnablingSettingEventArgs e = new Forms.EventHandlers.EnablingSettingEventArgs();
             e.Enabling = enabling;
             OnEnablingTransparentChatBox(this, e);
+        }
+
+        private void BroadcastEnablingHiddenDraggerBoxEvent (bool enabling) {
+            Forms.EventHandlers.EnablingSettingEventArgs e = new Forms.EventHandlers.EnablingSettingEventArgs();
+            e.Enabling = enabling;
+            OnEnablingHideDraggerBox(this, e);
         }
 
         private void BroadcastChangingChatOffsetEvent(double offsetChange) {
@@ -387,6 +397,22 @@ namespace TwitchVodPlayer.Forms {
             }
         }
 
+        private bool isHiddenDraggerBoxEnabled;
+        public bool IsHiddenDraggerBoxEnabled {
+            get {
+                return isHiddenDraggerBoxEnabled;
+            }
+            set {
+                isHiddenDraggerBoxEnabled = value;
+
+                //
+
+                transparentDraggerBoxToolStripMenuItem.Checked = isHiddenDraggerBoxEnabled;
+
+                BroadcastEnablingHiddenDraggerBoxEvent(isHiddenDraggerBoxEnabled);
+            }
+        }
+
         private bool isVideoVolumeBarClicked = false;
         public bool IsVideoVolumeBarClicked {
             get {
@@ -599,6 +625,7 @@ namespace TwitchVodPlayer.Forms {
             Properties.Settings.Default.HiddenChatBox = IsHiddenChatBoxEnabled;
             Properties.Settings.Default.HiddenChatBoxWindow = IsHiddenChatBoxWindowEnabled;
             Properties.Settings.Default.TransparentChatBox = IsTransparentChatBoxEnabled;
+            Properties.Settings.Default.HiddenDraggerBox = IsHiddenChatBoxEnabled;
         }
 
         private void MainForm_GotFocus(object sender, EventArgs e) {
@@ -674,6 +701,9 @@ namespace TwitchVodPlayer.Forms {
         private void TransparentChatBoxToolStripMenuItem_Click(object sender, EventArgs e) {
             ToggleTransparentChatBox();
         }
+        private void HideDraggerBoxToolStripMenuItem_Click (object sender, EventArgs e) {
+            ToggleHiddenDraggerBox();
+        }
         private void ToggleFullscreen() {
             IsFullscreen = !IsFullscreen;
         }
@@ -688,6 +718,9 @@ namespace TwitchVodPlayer.Forms {
         }
         public void ToggleTransparentChatBox() {
             IsTransparentChatBoxEnabled = !IsTransparentChatBoxEnabled;
+        }
+        public void ToggleHiddenDraggerBox () {
+            IsHiddenDraggerBoxEnabled = !IsHiddenDraggerBoxEnabled;
         }
 
         CancellationTokenSource hideOffsetTokenSource = new CancellationTokenSource();

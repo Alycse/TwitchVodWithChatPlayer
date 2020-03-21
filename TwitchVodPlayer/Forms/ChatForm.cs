@@ -39,6 +39,10 @@ namespace TwitchVodPlayer.Forms {
             ChangedChatOffset?.Invoke(this, e);
         }
 
+        public event Forms.EventHandlers.EnabledSettingEventHandler EnabledHiddenDraggerBox;
+        protected virtual void OnEnabledHiddenDraggerBox (object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
+            EnabledHiddenDraggerBox?.Invoke(this, e);
+        }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledHiddenChatBoxWindow;
         protected virtual void OnEnabledHiddenChatBoxWindow (object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledHiddenChatBoxWindow?.Invoke(this, e);
@@ -74,6 +78,11 @@ namespace TwitchVodPlayer.Forms {
             OnChangedChatOffset(this, e);
         }
 
+        private void BroadcastEnabledHiddenDraggerBox (bool enabled) {
+            Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs();
+            e.Enabled = enabled;
+            OnEnabledHiddenDraggerBox(this, e);
+        }
         private void BroadcastEnabledHiddenChatBoxWindow (bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs();
             e.Enabled = enabled;
@@ -182,6 +191,7 @@ namespace TwitchVodPlayer.Forms {
             MainForm.Instance.Move += MainForm_MoveMainForm;
             MainForm.Instance.EnablingHideChatBoxWindow += MainForm_EnablingHideChatBoxWindow;
             MainForm.Instance.EnablingHideChatBox += MainForm_EnablingHideChatBox;
+            MainForm.Instance.EnablingHideDraggerBox += MainForm_EnablingHideDraggerBox;
             MainForm.Instance.ChangingChatOffset += MainForm_ChangingChatOffset;
             MainForm.Instance.EnablingTransparentChatBox += MainForm_EnablingTransparentChatBox;
             MainForm.Instance.LoadedVideo += MainForm_LoadedVideo;
@@ -270,6 +280,17 @@ namespace TwitchVodPlayer.Forms {
             BroadcastEnabledHiddenChatBoxWindow(e.Enabling);
         }
 
+
+        private void MainForm_EnablingHideDraggerBox (object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
+            if (e.Enabling) {
+                HideDraggerBox();
+            } else {
+                ShowDraggerBox();
+            }
+
+            BroadcastEnabledHiddenDraggerBox(e.Enabling);
+        }
+
         private void MainForm_EnablingTransparentChatBox (object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
             if (e.Enabling) {
                 TransparencyKey = transparencyKeyColor;
@@ -329,6 +350,13 @@ namespace TwitchVodPlayer.Forms {
                     HideScrollbars();
                 }
             }
+        }
+
+        private void HideDraggerBox () {
+            draggerBox.Visible = false;
+        }
+        private void ShowDraggerBox () {
+            draggerBox.Visible = true;
         }
 
         void ShowScrollbars () {
@@ -744,5 +772,6 @@ namespace TwitchVodPlayer.Forms {
             }
             return (convertedBadgeBody + "<span style='color:" + color + "'><b>" + deserializedChatLogLine.commenter.display_name + "</b> </span>:  " + convertedMessageBody + " <br><br>");
         }
+
     }
 }

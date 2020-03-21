@@ -49,6 +49,7 @@ namespace TwitchVodPlayer.Forms {
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.stickyChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentChatBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transparentDraggerBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chatToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.recordChatExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recordChat2ExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -191,6 +192,7 @@ namespace TwitchVodPlayer.Forms {
             this.toolStripSeparator1,
             this.stickyChatBoxToolStripMenuItem,
             this.transparentChatBoxToolStripMenuItem,
+            this.transparentDraggerBoxToolStripMenuItem,
             this.chatToolStripSeparator3,
             this.recordChatExperimentalToolStripMenuItem,
             this.recordChat2ExperimentalToolStripMenuItem,
@@ -271,6 +273,14 @@ namespace TwitchVodPlayer.Forms {
             this.transparentChatBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.transparentChatBoxToolStripMenuItem.Text = "Enable Transparent Chat Box";
             this.transparentChatBoxToolStripMenuItem.Click += new System.EventHandler(this.TransparentChatBoxToolStripMenuItem_Click);
+            // 
+            // transparentDraggerBoxToolStripMenuItem
+            // 
+            this.transparentDraggerBoxToolStripMenuItem.Name = "transparentDraggerBoxToolStripMenuItem";
+            this.transparentDraggerBoxToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D";
+            this.transparentDraggerBoxToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.transparentDraggerBoxToolStripMenuItem.Text = "Hide Chat Box Dragger";
+            this.transparentDraggerBoxToolStripMenuItem.Click += new System.EventHandler(this.HideDraggerBoxToolStripMenuItem_Click);
             // 
             // chatToolStripSeparator3
             // 
@@ -590,5 +600,6 @@ namespace TwitchVodPlayer.Forms {
         private System.Windows.Forms.ToolStripMenuItem recordChat2ExperimentalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recordChat3ExperimentalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recordChat4ExperimentalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transparentDraggerBoxToolStripMenuItem;
     }
 }
