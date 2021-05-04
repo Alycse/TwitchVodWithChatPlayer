@@ -14,18 +14,13 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 
-namespace TwitchVodPlayer.Forms
-{
-    public partial class ChatForm : Form
-    {
+namespace TwitchVodPlayer.Forms {
+    public partial class ChatForm : Form {
 
         private static ChatForm instance;
-        public static ChatForm Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
+        public static ChatForm Instance {
+            get {
+                if (instance == null) {
                     instance = new ChatForm ();
                 }
                 return instance;
@@ -35,96 +30,80 @@ namespace TwitchVodPlayer.Forms
         //Events
 
         public event Forms.EventHandlers.MovedSeekBarEventHandler MovedSeekBar;
-        protected virtual void OnMovedSeekBar(object sender, Forms.EventHandlers.MovedSeekBarEventArgs e)
-        {
+        protected virtual void OnMovedSeekBar(object sender, Forms.EventHandlers.MovedSeekBarEventArgs e) {
             MovedSeekBar?.Invoke (this, e);
         }
 
         public event Forms.EventHandlers.ChangedChatOffsetEventHandler ChangedChatOffset;
-        protected virtual void OnChangedChatOffset(object sender, Forms.EventHandlers.ChangedChatOffsetEventArgs e)
-        {
+        protected virtual void OnChangedChatOffset(object sender, Forms.EventHandlers.ChangedChatOffsetEventArgs e) {
             ChangedChatOffset?.Invoke (this, e);
         }
 
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledHiddenDraggerBox;
-        protected virtual void OnEnabledHiddenDraggerBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledHiddenDraggerBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledHiddenDraggerBox?.Invoke (this, e);
         }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledHiddenChatBoxWindow;
-        protected virtual void OnEnabledHiddenChatBoxWindow(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledHiddenChatBoxWindow(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledHiddenChatBoxWindow?.Invoke (this, e);
         }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledHiddenChatBox;
-        protected virtual void OnEnabledHiddenChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledHiddenChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledHiddenChatBox?.Invoke (this, e);
         }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledTransparentChatBox;
-        protected virtual void OnEnabledTransparentChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledTransparentChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledTransparentChatBox?.Invoke (this, e);
         }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledStickyChatBox;
-        protected virtual void OnEnabledStickyChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledStickyChatBox(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledStickyChatBox?.Invoke (this, e);
         }
         public event Forms.EventHandlers.EnabledSettingEventHandler EnabledFullscreen;
-        protected virtual void OnEnabledFullscreen(object sender, Forms.EventHandlers.EnabledSettingEventArgs e)
-        {
+        protected virtual void OnEnabledFullscreen(object sender, Forms.EventHandlers.EnabledSettingEventArgs e) {
             EnabledFullscreen?.Invoke (this, e);
         }
 
         //Event Broadcasts
 
-        private void BroadcastMovedSeekBarEvent(int newSeekBarValue)
-        {
+        private void BroadcastMovedSeekBarEvent(int newSeekBarValue) {
             Forms.EventHandlers.MovedSeekBarEventArgs e = new Forms.EventHandlers.MovedSeekBarEventArgs ();
             e.NewSeekBarValue = newSeekBarValue;
             OnMovedSeekBar (this, e);
         }
 
-        private void BroadcastChangedChatOffsetEvent(double newOffset)
-        {
+        private void BroadcastChangedChatOffsetEvent(double newOffset) {
             Forms.EventHandlers.ChangedChatOffsetEventArgs e = new Forms.EventHandlers.ChangedChatOffsetEventArgs ();
             e.NewOffset = newOffset;
             OnChangedChatOffset (this, e);
         }
 
-        private void BroadcastEnabledHiddenDraggerBox(bool enabled)
-        {
+        private void BroadcastEnabledHiddenDraggerBox(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledHiddenDraggerBox (this, e);
         }
-        private void BroadcastEnabledHiddenChatBoxWindow(bool enabled)
-        {
+        private void BroadcastEnabledHiddenChatBoxWindow(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledHiddenChatBoxWindow (this, e);
         }
-        private void BroadcastEnabledHiddenChatBox(bool enabled)
-        {
+        private void BroadcastEnabledHiddenChatBox(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledHiddenChatBox (this, e);
         }
-        private void BroadcastEnabledTransparentChatBox(bool enabled)
-        {
+        private void BroadcastEnabledTransparentChatBox(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledTransparentChatBox (this, e);
         }
-        private void BroadcastEnabledStickyChatBox(bool enabled)
-        {
+        private void BroadcastEnabledStickyChatBox(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledStickyChatBox (this, e);
         }
-        private void BroadcastEnabledFullscreen(bool enabled)
-        {
+        private void BroadcastEnabledFullscreen(bool enabled) {
             Forms.EventHandlers.EnabledSettingEventArgs e = new Forms.EventHandlers.EnabledSettingEventArgs ();
             e.Enabled = enabled;
             OnEnabledFullscreen (this, e);
@@ -191,10 +170,8 @@ namespace TwitchVodPlayer.Forms
         [System.Runtime.InteropServices.DllImportAttribute ("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void draggerBox_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
+        private void draggerBox_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) {
                 ReleaseCapture ();
                 SendMessage (Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
@@ -202,15 +179,13 @@ namespace TwitchVodPlayer.Forms
 
         //Initialization
 
-        public ChatForm()
-        {
+        public ChatForm() {
             InitializeComponent ();
 
             defaultBorderStyle = FormBorderStyle;
         }
 
-        private void ChatForm_Load(object sender, EventArgs e)
-        {
+        private void ChatForm_Load(object sender, EventArgs e) {
             MainForm.Instance.EnablingFullscreen += MainForm_EnablingFullscreen;
             MainForm.Instance.EnablingStickyChatBox += MainForm_EnablingStickyChatBox;
             MainForm.Instance.Move += MainForm_MoveMainForm;
@@ -237,14 +212,12 @@ namespace TwitchVodPlayer.Forms
             LoadSavedUserSettings ();
         }
 
-        private void SubscribeFormInputToForm()
-        {
+        private void SubscribeFormInputToForm() {
             KeyPreview = true;
             KeyDown += Keyboard.FormInput.Form_KeyDown;
         }
 
-        private void LoadChatBoxWebControl()
-        {
+        private void LoadChatBoxWebControl() {
             isChatBoxLoaded = false;
 
             chatBoxWebControl.Navigate (Chat.Constants.ChatBoxHtmlPath);
@@ -256,200 +229,152 @@ namespace TwitchVodPlayer.Forms
 
             chatBoxWebControl.Document.Body.Style.CssText = "overflow:hidden";
 
-            if (isWindowShown)
-            {
+            if (isWindowShown) {
                 ShowScrollbars ();
-            }
-            else
-            {
+            } else {
                 HideScrollbars ();
             }
 
             isChatBoxLoaded = true;
         }
 
-        private void LoadSavedUserSettings()
-        {
-            try
-            {
+        private void LoadSavedUserSettings() {
+            try {
                 savedOffsets = JsonConvert.DeserializeObject<OrderedDictionary> (Properties.Settings.Default.SavedOffsets);
-            }
-            catch
-            {
+            } catch {
                 savedOffsets = null;
             }
-            if (savedOffsets == null)
-            {
+            if (savedOffsets == null) {
                 savedOffsets = new OrderedDictionary ();
             }
 
-            if (Properties.Settings.Default.ChatFormSize.Width != -1)
-            {
+            if (Properties.Settings.Default.ChatFormSize.Width != -1) {
                 ChatForm.Instance.Size = Properties.Settings.Default.ChatFormSize;
             }
-            if (Properties.Settings.Default.ChatFormLocation.X != -1)
-            {
+            if (Properties.Settings.Default.ChatFormLocation.X != -1) {
                 ChatForm.Instance.Location = Properties.Settings.Default.ChatFormLocation;
             }
         }
 
-        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e) {
             Application.Exit ();
-            if (chatWriter != null)
-            {
+            if (chatWriter != null) {
                 chatWriter.Close ();
             }
         }
 
         //Methods
 
-        private void MainForm_MovingSeekBar(object sender, Forms.EventHandlers.MovingSeekBarEventArgs e)
-        {
+        private void MainForm_MovingSeekBar(object sender, Forms.EventHandlers.MovingSeekBarEventArgs e) {
             ClearChatBox ();
         }
 
-        private void StickToVideoForm()
-        {
+        private void StickToVideoForm() {
             Location = new Point (MainForm.Instance.Location.X + MainForm.Instance.Width + chatBoxDistance, MainForm.Instance.Location.Y);
             Size = new Size (new Point (Width, MainForm.Instance.Height));
         }
 
-        private void MainForm_EnablingHideChatBoxWindow(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
+        private void MainForm_EnablingHideChatBoxWindow(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
             EnableWindow (!e.Enabling);
 
             BroadcastEnabledHiddenChatBoxWindow (e.Enabling);
         }
 
 
-        private void MainForm_EnablingHideDraggerBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
-            if (e.Enabling)
-            {
+        private void MainForm_EnablingHideDraggerBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
+            if (e.Enabling) {
                 HideDraggerBox ();
-            }
-            else
-            {
+            } else {
                 ShowDraggerBox ();
             }
 
             BroadcastEnabledHiddenDraggerBox (e.Enabling);
         }
 
-        private void MainForm_EnablingTransparentChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
-            if (e.Enabling)
-            {
+        private void MainForm_EnablingTransparentChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
+            if (e.Enabling) {
                 TransparencyKey = transparencyKeyColor;
-            }
-            else
-            {
+            } else {
                 TransparencyKey = Color.FromArgb (1, 1, 1);
             }
 
             BroadcastEnabledTransparentChatBox (e.Enabling);
         }
 
-        private void MainForm_EnablingHideChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
-            if (e.Enabling)
-            {
+        private void MainForm_EnablingHideChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
+            if (e.Enabling) {
                 Hide ();
-            }
-            else
-            {
+            } else {
                 Show ();
             }
 
             BroadcastEnabledHiddenChatBox (e.Enabling);
         }
 
-        private void MainForm_MoveMainForm(object sender, EventArgs e)
-        {
-            if (isStickyChatBoxEnabling)
-            {
+        private void MainForm_MoveMainForm(object sender, EventArgs e) {
+            if (isStickyChatBoxEnabling) {
                 StickToVideoForm ();
             }
         }
 
-        private void MainForm_ChangingChatOffset(object sender, Forms.EventHandlers.ChangingChatOffsetEventArgs e)
-        {
-            if (CurrentChat != null)
-            {
+        private void MainForm_ChangingChatOffset(object sender, Forms.EventHandlers.ChangingChatOffsetEventArgs e) {
+            if (CurrentChat != null) {
                 currentChatOffset += e.OffsetChange;
                 BroadcastChangedChatOffsetEvent (currentChatOffset);
             }
         }
 
-        private void MainForm_EnablingStickyChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
+        private void MainForm_EnablingStickyChatBox(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
             isStickyChatBoxEnabling = e.Enabling;
 
-            if (isStickyChatBoxEnabling)
-            {
+            if (isStickyChatBoxEnabling) {
                 StickToVideoForm ();
             }
 
             BroadcastEnabledStickyChatBox (e.Enabling);
         }
 
-        private void EnableWindow(bool enable)
-        {
+        private void EnableWindow(bool enable) {
             isWindowShown = enable;
 
-            if (isWindowShown)
-            {
+            if (isWindowShown) {
                 FormBorderStyle = defaultBorderStyle;
                 draggerBox.Visible = false;
-                if (isChatBoxLoaded)
-                {
+                if (isChatBoxLoaded) {
                     ShowScrollbars ();
                 }
-            }
-            else
-            {
+            } else {
                 FormBorderStyle = FormBorderStyle.None;
                 draggerBox.Visible = true;
-                if (isChatBoxLoaded)
-                {
+                if (isChatBoxLoaded) {
                     HideScrollbars ();
                 }
             }
         }
 
-        private void HideDraggerBox()
-        {
+        private void HideDraggerBox() {
             draggerBox.Visible = false;
         }
-        private void ShowDraggerBox()
-        {
+        private void ShowDraggerBox() {
             draggerBox.Visible = true;
         }
 
-        void ShowScrollbars()
-        {
+        void ShowScrollbars() {
             ExecuteJavascriptCommand ("showScrollbars()");
         }
 
-        void HideScrollbars()
-        {
+        void HideScrollbars() {
             ExecuteJavascriptCommand ("hideScrollbars()");
         }
 
-        private void MainForm_EnablingFullscreen(object sender, Forms.EventHandlers.EnablingSettingEventArgs e)
-        {
+        private void MainForm_EnablingFullscreen(object sender, Forms.EventHandlers.EnablingSettingEventArgs e) {
             isFullscreen = e.Enabling;
 
-            if (isStickyChatBoxEnabling)
-            {
-                if (isFullscreen)
-                {
+            if (isStickyChatBoxEnabling) {
+                if (isFullscreen) {
                     Location = new Point (Screen.PrimaryScreen.Bounds.Width - Width, 0);
                     Size = new Size (new Point (Width, MainForm.Instance.Height));
-                }
-                else
-                {
+                } else {
                     StickToVideoForm ();
                 }
             }
@@ -457,38 +382,27 @@ namespace TwitchVodPlayer.Forms
             BroadcastEnabledFullscreen (e.Enabling);
         }
 
-        private void SetChatBackgroundColor(Color color)
-        {
+        private void SetChatBackgroundColor(Color color) {
             ExecuteJavascriptCommand ("setChatBackgroundColor('rgb(" + color.R + ", " + color.G + ", " + color.B + ")')");
         }
 
-        private void ExecuteJavascriptCommand(string command)
-        {
+        private void ExecuteJavascriptCommand(string command) {
             Instance.Invoke (new Action (() => {
-                try
-                {
+                try {
                     geckoJs.EvaluateScript (command);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     Console.WriteLine ("Error executing javascript command: " + command + ", Reason: " + e.Message);
                 }
             }));
         }
 
-        private void SaveCurrentChatOffset()
-        {
-            if (CurrentChat != null)
-            {
-                if (savedOffsets.Contains (CurrentChat.FilePath))
-                {
+        private void SaveCurrentChatOffset() {
+            if (CurrentChat != null) {
+                if (savedOffsets.Contains (CurrentChat.FilePath)) {
                     savedOffsets[CurrentChat.FilePath] = currentChatOffset;
-                }
-                else
-                {
+                } else {
                     savedOffsets.Add (CurrentChat.FilePath, currentChatOffset);
-                    if (savedOffsets.Count > maxSavedOffsetsCount)
-                    {
+                    if (savedOffsets.Count > maxSavedOffsetsCount) {
                         savedOffsets.RemoveAt (savedOffsets.Count - 1);
                     }
                 }
@@ -497,48 +411,37 @@ namespace TwitchVodPlayer.Forms
             }
         }
 
-        private void MainForm_MainFormClosing(object sender, EventArgs e)
-        {
+        private void MainForm_MainFormClosing(object sender, EventArgs e) {
             SaveCurrentChatOffset ();
         }
 
-        private void MainForm_LoadedVideo(object sender, Forms.EventHandlers.LoadedVideoEventArgs e)
-        {
+        private void MainForm_LoadedVideo(object sender, Forms.EventHandlers.LoadedVideoEventArgs e) {
             SaveCurrentChatOffset ();
 
             string chatFilePath = GetChatFilePath (e.Video.FilePath);
 
-            if (chatFilePath != null)
-            {
+            if (chatFilePath != null) {
                 LoadChat (chatFilePath);
-            }
-            else
-            {
+            } else {
                 LoadChat (null);
             }
         }
 
-        private string GetChatFilePath(string videoFilePath)
-        {
+        private string GetChatFilePath(string videoFilePath) {
             string chatFilePath = Path.GetDirectoryName (videoFilePath) + @"\" +
                 Path.GetFileNameWithoutExtension (videoFilePath) + Chat.Constants.ChatFileExtension;
-            if (File.Exists (chatFilePath))
-            {
+            if (File.Exists (chatFilePath)) {
                 return chatFilePath;
-            }
-            else
-            {
+            } else {
                 return null;
             }
         }
 
-        private void ShowChatLoadingDisplay()
-        {
+        private void ShowChatLoadingDisplay() {
             ExecuteJavascriptCommand ("showLoadingDisplay()");
         }
 
-        private void MainForm_LoadingVideo(object sender, Forms.EventHandlers.LoadingVideoEventArgs e)
-        {
+        private void MainForm_LoadingVideo(object sender, Forms.EventHandlers.LoadingVideoEventArgs e) {
             getChatLogLinesListTokenSource.Cancel ();
             getChatLogLinesListTokenSource = new CancellationTokenSource ();
             chatLogLines = null;
@@ -548,12 +451,10 @@ namespace TwitchVodPlayer.Forms
 
         CancellationTokenSource getChatLogLinesListTokenSource = new CancellationTokenSource ();
 
-        public void LoadChat(string chatFilePath)
-        {
+        public void LoadChat(string chatFilePath) {
             isChatFileLoaded = false;
             chatBoxUpdateTimer.Stop ();
-            if (chatFilePath != null)
-            {
+            if (chatFilePath != null) {
                 Chat.ChatFile chatFile = new Chat.ChatFile (chatFilePath);
                 Instance.Invoke (new Action (async () => {
                     Chat.MessageParser messageParser = new Chat.MessageParser ();
@@ -564,12 +465,10 @@ namespace TwitchVodPlayer.Forms
 
                     badgeChannelSet = messageParser.GetBadgeSet (chatFile.ChannelId);
                     badgeSet = messageParser.GetBadgeSet ("");
-                    if (badgeSet != null)
-                    {
+                    if (badgeSet != null) {
                         deserializedBadgeSet = JsonConvert.DeserializeObject<dynamic> (badgeSet.ToString ());
                     }
-                    if (badgeChannelSet != null)
-                    {
+                    if (badgeChannelSet != null) {
                         deserializedBadgeChannelSet = JsonConvert.DeserializeObject<dynamic> (badgeChannelSet.ToString ());
                     }
                     currentChannelId = chatFile.ChannelId;
@@ -578,8 +477,7 @@ namespace TwitchVodPlayer.Forms
 
                     CurrentChat = chatFile;
 
-                    if (savedOffsets.Contains (CurrentChat.FilePath))
-                    {
+                    if (savedOffsets.Contains (CurrentChat.FilePath)) {
                         currentChatOffset = (double) savedOffsets[CurrentChat.FilePath];
                     }
 
@@ -587,9 +485,7 @@ namespace TwitchVodPlayer.Forms
 
                     chatBoxUpdateTimer.Start ();
                 }));
-            }
-            else
-            {
+            } else {
                 currentChannelId = null;
                 chatLogLines = null;
                 CurrentChat = null;
@@ -599,29 +495,21 @@ namespace TwitchVodPlayer.Forms
             isChatFileLoaded = true;
         }
 
-        private void GetChatLogLinesList(string chatFilePath, CancellationToken token)
-        {
+        private void GetChatLogLinesList(string chatFilePath, CancellationToken token) {
             chatLogLines = new List<Tuple<double, string>> ();
             string[] separatedChatLogLine;
             char[] separators = new char[] { ':' };
             string chatLogLine;
-            using (StreamReader streamReader = new StreamReader (chatFilePath))
-            {
-                while ((chatLogLine = streamReader.ReadLine ()) != null)
-                {
-                    if (token.IsCancellationRequested)
-                    {
+            using (StreamReader streamReader = new StreamReader (chatFilePath)) {
+                while ((chatLogLine = streamReader.ReadLine ()) != null) {
+                    if (token.IsCancellationRequested) {
                         return;
                     }
-                    if (chatLogLine != "" && chatLogLine[0] != '~')
-                    {
-                        try
-                        {
+                    if (chatLogLine != "" && chatLogLine[0] != '~') {
+                        try {
                             separatedChatLogLine = chatLogLine.Split (separators, 2);
                             chatLogLines.Add (new Tuple<double, string> (double.Parse (separatedChatLogLine[0]), separatedChatLogLine[1]));
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             Console.WriteLine ("Error reading chat line: " + chatLogLine + ", Reason: " + e.Message);
                         }
                     }
@@ -629,40 +517,32 @@ namespace TwitchVodPlayer.Forms
             }
         }
 
-        private void SetChatLogUpdateTimerTick()
-        {
+        private void SetChatLogUpdateTimerTick() {
             previousVideoPlayerTime = 0;
 
-            if (chatBoxUpdateTimer == null)
-            {
+            if (chatBoxUpdateTimer == null) {
                 chatBoxUpdateTimer = new System.Windows.Forms.Timer ();
                 chatBoxUpdateTimer.Tick += new EventHandler (chatBoxUpdateTimer_Tick);
                 chatBoxUpdateTimer.Interval = chatBoxUpdateTimerIntervalMilliseconds;
             }
         }
 
-        private void chatBoxUpdateTimer_Tick(object sender, EventArgs e)
-        {
-            if (isChatBoxLoaded && isChatFileLoaded)
-            {
+        private void chatBoxUpdateTimer_Tick(object sender, EventArgs e) {
+            if (isChatBoxLoaded && isChatFileLoaded) {
                 UpdateChatBox ();
             }
         }
 
         CancellationTokenSource parseChatLogLineTokenSource = new CancellationTokenSource ();
-        private void UpdateChatBox()
-        {
-            if (chatLogLines != null && chatLogLines.Count > 0 && !MainForm.Instance.IsVideoSeekBarClicked && !recordingChat)
-            {
+        private void UpdateChatBox() {
+            if (chatLogLines != null && chatLogLines.Count > 0 && !MainForm.Instance.IsVideoSeekBarClicked && !recordingChat) {
 
                 while (currentChatLogLinesIndex < chatLogLines.Count &&
-                    chatLogLines[currentChatLogLinesIndex].Item1 <= (MainForm.Instance.VideoPlayerTime * 1000) + currentChatOffset)
-                {
+                    chatLogLines[currentChatLogLinesIndex].Item1 <= (MainForm.Instance.VideoPlayerTime * 1000) + currentChatOffset) {
 
                     string chatLogLine = ParseChatLogLine (chatLogLines[currentChatLogLinesIndex].Item2, currentChannelId, parseChatLogLineTokenSource.Token);
 
-                    if (chatLogLine != null && chatLogLine != "")
-                    {
+                    if (chatLogLine != null && chatLogLine != "") {
                         AddChatLine (chatLogLine);
                     }
                     currentChatLogLinesIndex++;
@@ -672,12 +552,10 @@ namespace TwitchVodPlayer.Forms
             }
         }
 
-        public async void ClearChatBox()
-        {
+        public async void ClearChatBox() {
             await Task.Delay (500);
 
-            if (chatLogLines != null && chatLogLines.Count > 0)
-            {
+            if (chatLogLines != null && chatLogLines.Count > 0) {
                 findCurrentChatLogLinesIndexTokenSource.Cancel ();
                 findCurrentChatLogLinesIndexTokenSource = new CancellationTokenSource ();
 
@@ -691,18 +569,12 @@ namespace TwitchVodPlayer.Forms
         }
 
         CancellationTokenSource findCurrentChatLogLinesIndexTokenSource = new CancellationTokenSource ();
-        private void FindCurrentChatLogLinesIndex(CancellationToken token, double videoTime = 0)
-        {
-            if (chatLogLines != null)
-            {
-                for (int i = 0; i < chatLogLines.Count; i++)
-                {
-                    if (token.IsCancellationRequested)
-                    {
+        private void FindCurrentChatLogLinesIndex(CancellationToken token, double videoTime = 0) {
+            if (chatLogLines != null) {
+                for (int i = 0; i < chatLogLines.Count; i++) {
+                    if (token.IsCancellationRequested) {
                         break;
-                    }
-                    else if (chatLogLines[i].Item1 >= videoTime)
-                    {
+                    } else if (chatLogLines[i].Item1 >= videoTime) {
                         currentChatLogLinesIndex = Math.Max (0, i - 10);
                         break;
                     }
@@ -710,8 +582,7 @@ namespace TwitchVodPlayer.Forms
             }
         }
 
-        private void AddChatLine(string chatLine)
-        {
+        private void AddChatLine(string chatLine) {
             ExecuteJavascriptCommand ("addChatLine(\"" + chatLine + "\", true)");
         }
 
@@ -719,10 +590,8 @@ namespace TwitchVodPlayer.Forms
         [return: MarshalAs (UnmanagedType.Bool)]
         static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
         VideoFileWriter chatWriter;
-        public async void RecordChat(float beginFramePerc, float endFramePerc)
-        {
-            if (CurrentChat == null)
-            {
+        public async void RecordChat(float beginFramePerc, float endFramePerc) {
+            if (CurrentChat == null) {
                 return;
             }
 
@@ -752,10 +621,8 @@ namespace TwitchVodPlayer.Forms
 
             int recordCurrentChatLogLinesIndex = 0;
             int targetTime = ((int) ((((float) beginFrame / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
-            for (int i = 0; i < chatLogLines.Count; i++)
-            {
-                if (chatLogLines[i].Item1 >= targetTime)
-                {
+            for (int i = 0; i < chatLogLines.Count; i++) {
+                if (chatLogLines[i].Item1 >= targetTime) {
                     recordCurrentChatLogLinesIndex = Math.Max (0, i - 10);
                     break;
                 }
@@ -773,48 +640,35 @@ namespace TwitchVodPlayer.Forms
             ExecuteJavascriptCommand ("clearChatBox()");
             await Task.Delay (500);
 
-            for (int i = beginFrame; i < endFrame; i++)
-            {
+            for (int i = beginFrame; i < endFrame; i++) {
                 int messageTime = ((int) ((((float) i / fps) * 1000) / messageTimeChunk)) * messageTimeChunk;
-                while (chatLogLines[recordCurrentChatLogLinesIndex].Item1 <= messageTime)
-                {
+                while (chatLogLines[recordCurrentChatLogLinesIndex].Item1 <= messageTime) {
                     Func<string> parseChatLogLineFunction = new Func<string> (() =>
                                 ParseChatLogLine (chatLogLines[recordCurrentChatLogLinesIndex++].Item2, currentChannelId, parseChatLogLineTokenSource.Token));
                     string chatLogLine = await Task.Run<string> (parseChatLogLineFunction);
 
-                    if (chatLogLine.Contains (".gif"))
-                    {
+                    if (chatLogLine.Contains (".gif")) {
                         gifPresentSinceLines = maxGifLines;
-                    }
-                    else
-                    {
+                    } else {
                         gifPresentSinceLines--;
                     }
 
-                    if (chatLogLine != null && chatLogLine != "")
-                    {
+                    if (chatLogLine != null && chatLogLine != "") {
                         AddChatLine (chatLogLine);
-                        if (!firstMessageShown)
-                        {
+                        if (!firstMessageShown) {
                             firstMessageShown = true;
                         }
                     }
                 }
-                if (gifPresentSinceLines > 0)
-                {
+                if (gifPresentSinceLines > 0) {
                     await Task.Delay ((int) (1000 / fps / speedMultiplier));
-                }
-                else
-                {
+                } else {
                     await Task.Delay (1);
                 }
 
-                using (Graphics controlGraphics = chatBoxWebControl.CreateGraphics ())
-                {
-                    using (Bitmap bitmap = new Bitmap (chatBoxWebControl.Size.Width, chatBoxWebControl.Size.Height, controlGraphics))
-                    {
-                        using (Graphics memoryGraphics = Graphics.FromImage (bitmap))
-                        {
+                using (Graphics controlGraphics = chatBoxWebControl.CreateGraphics ()) {
+                    using (Bitmap bitmap = new Bitmap (chatBoxWebControl.Size.Width, chatBoxWebControl.Size.Height, controlGraphics)) {
+                        using (Graphics memoryGraphics = Graphics.FromImage (bitmap)) {
                             IntPtr dc = memoryGraphics.GetHdc ();
                             PrintWindow (chatBoxWebControl.Handle, dc, 0);
                             memoryGraphics.ReleaseHdc (dc);
@@ -823,8 +677,7 @@ namespace TwitchVodPlayer.Forms
                     }
                 }
 
-                if (stopwatch.ElapsedMilliseconds >= 6000)
-                {
+                if (stopwatch.ElapsedMilliseconds >= 6000) {
                     int framePerSec = (i - prevChatLogLineIndex) / 6;
                     prevChatLogLineIndex = i;
                     estTimeRemaining = TimeSpan.FromSeconds ((totalFrames - i) / framePerSec);
@@ -836,8 +689,7 @@ namespace TwitchVodPlayer.Forms
                 Instance.Text =
                     "Recording Chat... - " + (i + " Frames / " + endFrame + " Frames (" + percentage + "%)");
 
-                if (estTimeRemaining != TimeSpan.Zero)
-                {
+                if (estTimeRemaining != TimeSpan.Zero) {
                     Instance.Text += " - EST: " + (int) estTimeRemaining.TotalHours + " H " + (int) estTimeRemaining.Minutes + " M ";
                 }
             }
@@ -855,18 +707,15 @@ namespace TwitchVodPlayer.Forms
             Instance.Text = "Chat";
         }
 
-        private string ParseChatLogLine(string chatLogLine, string channelId, CancellationToken token)
-        {
+        private string ParseChatLogLine(string chatLogLine, string channelId, CancellationToken token) {
             dynamic deserializedChatLogLine = JsonConvert.DeserializeObject<JObject> (chatLogLine);
 
-            if (deserializedChatLogLine._id.ToString () == previousChatLogLineId)
-            {
+            if (deserializedChatLogLine._id.ToString () == previousChatLogLineId) {
                 return "";
             }
             previousChatLogLineId = deserializedChatLogLine._id.ToString ();
 
-            if (deserializedChatLogLine.message == null)
-            {
+            if (deserializedChatLogLine.message == null) {
                 return chatLogLine;
             }
 
@@ -876,8 +725,7 @@ namespace TwitchVodPlayer.Forms
             convertedMessageBody = convertedMessageBody.Replace ("\"", "\\\"");
 
             //Parse Twitch Emoticons
-            if (deserializedChatLogLine.message.emoticons != null)
-            {
+            if (deserializedChatLogLine.message.emoticons != null) {
                 convertedMessageBody = messageParser.ParseTwitchEmoticons (deserializedChatLogLine.message.emoticons, channelId, convertedMessageBody);
             }
 
@@ -894,8 +742,7 @@ namespace TwitchVodPlayer.Forms
                 new Fetching.Emoticons.BttvEmoticonDownloader (), Fetching.Constants.BttvEmoticonsDirectoryName, channelId, convertedMessageBody);
 
             //Parse Badges
-            if (deserializedChatLogLine.message.user_badges != null)
-            {
+            if (deserializedChatLogLine.message.user_badges != null) {
                 convertedBadgeBody = messageParser.ParseBadgeSet (deserializedBadgeChannelSet, deserializedChatLogLine.message.user_badges, channelId, convertedBadgeBody);
                 convertedBadgeBody = messageParser.ParseBadgeSet (deserializedBadgeSet, deserializedChatLogLine.message.user_badges, "", convertedBadgeBody);
             }
@@ -903,14 +750,12 @@ namespace TwitchVodPlayer.Forms
             convertedMessageBody = "&nbsp;" + convertedMessageBody + "&nbsp;";
             convertedBadgeBody = "&nbsp; " + convertedBadgeBody + "&nbsp;";
 
-            if (token.IsCancellationRequested)
-            {
+            if (token.IsCancellationRequested) {
                 return null;
             }
 
             string color = deserializedChatLogLine.message.user_color;
-            if (color == "#000000")
-            {
+            if (color == "#000000") {
                 color = "#808080";
             }
             return (convertedBadgeBody + "<span style='color:" + color + "'><b>" + deserializedChatLogLine.commenter.display_name + "</b> </span>:  " + convertedMessageBody + " <br><br>");
