@@ -1,10 +1,11 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Net;
 
 namespace TwitchVodPlayer.Fetching.Emoticons {
     class BttvEmoticonJsonFetcher : EmoticonJsonFetcher {
 
-        public void GetEmoticonJson(string channelId, string channelName, bool forceDownloadJson) {
+        public void GetEmoticonJson(string channelId, bool forceDownloadJson) {
             if (!Directory.Exists(Fetching.Constants.JsonPath)) {
                 Directory.CreateDirectory(Fetching.Constants.JsonPath);
             }
@@ -12,11 +13,12 @@ namespace TwitchVodPlayer.Fetching.Emoticons {
             using (WebClient wc = new WebClient()) {
                 string url;
                 string jsonFileName;
-                if (channelName == "") {
+                if (channelId == "") {
                     url = Fetching.Constants.BttvGlobalEmoticonUrl;
                     jsonFileName = Fetching.Constants.BttvEmoticonJsonFileName;
                 } else {
-                    url = Fetching.Constants.BttvChannelEmoticonUrl.Replace("<channelName>", channelName);
+                    url = Fetching.Constants.BttvChannelEmoticonUrl.Replace("<channelId>", channelId);
+                    Debug.WriteLine("BTTV URL: " + url);
                     jsonFileName = Fetching.Constants.BttvEmoticonJsonFileName + "_" + channelId;
                 }
 

@@ -9,12 +9,12 @@
         public static readonly string TwitchEmoticonIdUrl = "https://static-cdn.jtvnw.net/emoticons/v1/<emoticonId>/<emoticonSize>";
         public static readonly string TwitchEmoticonSize = "1.0";
 
-        public static readonly string BttvChannelEmoticonUrl = "https://api.betterttv.net/2/channels/<channelName>";
-        public static readonly string BttvGlobalEmoticonUrl = "https://api.betterttv.net/2/emotes";
+        public static readonly string BttvChannelEmoticonUrl = "https://api.betterttv.net/3/cached/users/twitch/<channelId>";
+        public static readonly string BttvGlobalEmoticonUrl = "https://api.betterttv.net/3/cached/emotes/global";
         public static readonly string BttvEmoticonSize = "1x";
 
         public static readonly string FfzChannelEmoticonUrl = "https://api.frankerfacez.com/v1/room/<channelName>";
-        public static readonly string FfzGlobalEmoticonUrl = "https://api.frankerfacez.com/v1/emoticons?per_page=1000";
+        public static readonly string FfzGlobalEmoticonUrl = "https://api.frankerfacez.com/v1/emoticons?per_page=200";
 
         public static readonly string ChannelIdUrl = "https://api.twitch.tv/kraken/users?login=<channelName>";
         public static readonly string BadgesChannelUrl = "https://badges.twitch.tv/v1/badges/channels/<channelId>/display?language=en";

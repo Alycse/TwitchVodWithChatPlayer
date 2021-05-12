@@ -87,7 +87,7 @@ namespace TwitchVodPlayer.Resources {
 
             if (willDownloadBttvEmoticons) {
                 try {
-                    await DownloadBttvEmoticonJsons(channelId, channelName, willForceDownload);
+                    await DownloadBttvEmoticonJsons(channelId, willForceDownload);
                 } catch (Exception e) {
                     BroadcastErrorOccuredDownloadingResourcesEvent("Error occured downloading emoticons: " + e.Message);
                     CurrentlyDownloadingResources = false;
@@ -135,16 +135,16 @@ namespace TwitchVodPlayer.Resources {
             BroadcastNewProgressDownloadingResourcesEvent("Downloading Emoticon json files...", 100);
         }
 
-        private async Task DownloadBttvEmoticonJsons(string channelId, string channelName, bool forceDownloadJson) {
+        private async Task DownloadBttvEmoticonJsons(string channelId, bool forceDownloadJson) {
             BroadcastNewProgressDownloadingResourcesEvent("Downloading Emoticon json files...", 33);
 
             Fetching.Emoticons.BttvEmoticonJsonFetcher bttvEmoticonJsonFetcher = new Fetching.Emoticons.BttvEmoticonJsonFetcher();
 
-            await Task.Run(() => bttvEmoticonJsonFetcher.GetEmoticonJson(channelId, channelName, forceDownloadJson));
+            await Task.Run(() => bttvEmoticonJsonFetcher.GetEmoticonJson(channelId, forceDownloadJson));
 
             BroadcastNewProgressDownloadingResourcesEvent("Downloading Emoticon json files...", 66);
 
-            await Task.Run(() => bttvEmoticonJsonFetcher.GetEmoticonJson("", "", forceDownloadJson));
+            await Task.Run(() => bttvEmoticonJsonFetcher.GetEmoticonJson("", forceDownloadJson));
 
             BroadcastNewProgressDownloadingResourcesEvent("Downloading Emoticon json files...", 100);
         }

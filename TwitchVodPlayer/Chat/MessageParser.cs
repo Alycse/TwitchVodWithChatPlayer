@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -190,6 +191,7 @@ namespace TwitchVodPlayer.Chat {
             if (!File.Exists(jsonPath)) {
                 return null;
             }
+            Debug.WriteLine("Emoticon FFZ: " + jsonPath);
             using (WebClient client = new WebClient()) {
                 using (Stream stream = client.OpenRead(jsonPath)) {
                     using (StreamReader streamReader = new StreamReader(stream)) {
@@ -208,6 +210,11 @@ namespace TwitchVodPlayer.Chat {
                                 }
 
                                 var emoticon = serializer.Deserialize<dynamic>(reader);
+
+                                if(emoticon.urls == null)
+                                {
+                                    continue;
+                                }
 
                                 string[] urls = ((string)emoticon.urls.ToString()).Split(',');
                                 string[] separatedFirstURL = urls[0].Split(':');
