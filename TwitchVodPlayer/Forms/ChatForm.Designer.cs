@@ -79,6 +79,5 @@
         #endregion
         private System.Windows.Forms.PictureBox draggerBox;
         private Gecko.GeckoWebBrowser chatBoxWebControl;
-        private Controls.TransparentPanel transparentPanel;
     }
 }

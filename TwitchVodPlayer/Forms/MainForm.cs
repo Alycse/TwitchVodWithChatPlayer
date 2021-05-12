@@ -203,7 +203,7 @@ namespace TwitchVodPlayer.Forms {
 
                     try {
                         videoFullscreenButton.BackgroundImage = Properties.Resources.WindowedButton;
-                    } catch (FileNotFoundException e) {
+                    } catch {
                         Console.WriteLine("Windowed Button image file not found.");
                     }
                 } else {
@@ -213,7 +213,7 @@ namespace TwitchVodPlayer.Forms {
 
                     try {
                         videoFullscreenButton.BackgroundImage = Properties.Resources.FullscreenButton;
-                    } catch (FileNotFoundException e) {
+                    } catch {
                         Console.WriteLine("Fullscreen Button image file not found.");
                     }
                 }
@@ -238,7 +238,7 @@ namespace TwitchVodPlayer.Forms {
                 if (isVideoPlayerPlaying) {
                     try {
                         videoPlaybackButton.BackgroundImage = Properties.Resources.PauseButton;
-                    } catch (FileNotFoundException e) {
+                    } catch{
                         Console.WriteLine("Pause Button image file not found.");
                     }
 
@@ -246,7 +246,7 @@ namespace TwitchVodPlayer.Forms {
                 } else {
                     try {
                         videoPlaybackButton.BackgroundImage = Properties.Resources.PlayButton;
-                    } catch (FileNotFoundException e) {
+                    } catch {
                         Console.WriteLine("Play Button image file not found.");
                     }
 

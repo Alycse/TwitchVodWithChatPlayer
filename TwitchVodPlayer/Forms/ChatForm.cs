@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Threading;
 
 namespace TwitchVodPlayer.Forms {
     public partial class ChatForm : Form {
